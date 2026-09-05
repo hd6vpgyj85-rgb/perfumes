@@ -1,5 +1,5 @@
 .cta {
-  background: radial-gradient(120% 100% at 50% 0%, #241811 0%, var(--color-black) 70%);
+  background: radial-gradient(120% 100% at 50% 0%, #2e1420 0%, var(--color-black) 70%);
   padding-block: clamp(4rem, 10vw, 7rem);
 }
 
@@ -21,7 +21,7 @@
 .cta__line {
   width: 1px;
   height: 40px;
-  background: linear-gradient(to bottom, transparent, var(--color-gold), transparent);
+  background: linear-gradient(to bottom, transparent, var(--color-accent), transparent);
 }
 
 .cta__title {

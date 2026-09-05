@@ -78,13 +78,13 @@
 }
 
 .category-card--dark {
-  background: linear-gradient(160deg, #241811, var(--color-black));
+  background: linear-gradient(160deg, #1c1013, var(--color-black));
   color: var(--color-ivory);
 }
 
 .category-card--dark .category-card__eyebrow,
 .category-card--dark .category-card__cta {
-  color: var(--color-gold-light);
+  color: var(--color-accent-light);
 }
 
 .category-card--light {
@@ -95,7 +95,7 @@
 
 .category-card--light .category-card__eyebrow,
 .category-card--light .category-card__cta {
-  color: var(--color-gold-dark);
+  color: var(--color-accent-dark);
 }
 
 .category-card--editorial {
@@ -109,7 +109,7 @@
 
 .category-card--editorial .category-card__eyebrow,
 .category-card--editorial .category-card__cta {
-  color: var(--color-gold-light);
+  color: var(--color-accent-light);
 }
 
 @media (min-width: 860px) {

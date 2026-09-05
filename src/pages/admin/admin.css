@@ -71,6 +71,7 @@
 
 .admin__header {
   display: flex;
+  flex-wrap: wrap;
   align-items: flex-start;
   justify-content: space-between;
   gap: 1rem;
@@ -105,7 +106,7 @@
 
 .admin-tabbar__tab.is-active {
   color: var(--color-ink);
-  border-bottom-color: var(--color-gold);
+  border-bottom-color: var(--color-accent);
 }
 
 .admin-panel {
@@ -134,7 +135,7 @@
 
 .admin-row {
   display: grid;
-  grid-template-columns: 56px 1fr;
+  grid-template-columns: 56px minmax(0, 1fr);
   grid-template-areas:
     "media info"
     "media price"
@@ -172,23 +173,28 @@
 
 .admin-row__info {
   grid-area: info;
+  min-width: 0;
 }
 
 .admin-row__name {
   font-weight: 700;
+  overflow-wrap: break-word;
 }
 
 .admin-row__meta {
   font-size: 0.8rem;
   color: var(--color-ink-soft);
   text-transform: capitalize;
+  overflow-wrap: break-word;
 }
 
 .admin-row__price {
   grid-area: price;
   font-weight: 600;
   display: flex;
+  flex-wrap: wrap;
   gap: 0.5rem;
+  min-width: 0;
 }
 
 .admin-row__price-prev {
@@ -206,12 +212,13 @@
   grid-area: visible;
   font-size: 0.85rem;
   font-weight: 600;
-  color: var(--color-gold-dark);
+  color: var(--color-accent-dark);
 }
 
 .admin-row__actions {
   grid-area: actions;
   display: flex;
+  flex-wrap: wrap;
   gap: 0.5rem;
   margin-top: 0.5rem;
 }
@@ -236,7 +243,7 @@
   justify-content: center;
   padding: 1.5rem;
   overflow-y: auto;
-  background: rgba(11, 10, 8, 0.6);
+  background: rgba(10, 10, 10, 0.6);
 }
 
 .admin-modal__card {
@@ -304,6 +311,7 @@
 
 .admin-modal__actions {
   display: flex;
+  flex-wrap: wrap;
   justify-content: flex-end;
   gap: 0.75rem;
   margin-top: 0.5rem;
@@ -311,12 +319,13 @@
 
 @media (min-width: 640px) {
   .admin-row {
-    grid-template-columns: 56px 2fr 1fr 1fr 1fr auto;
+    grid-template-columns: 56px minmax(0, 2fr) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr) auto;
     grid-template-areas: "media info price stock visible actions";
   }
 
   .admin-row__actions {
     margin-top: 0;
+    flex-wrap: nowrap;
   }
 
   .admin-form-grid {
@@ -324,7 +333,7 @@
   }
 
   .admin-coupon {
-    grid-template-columns: 2fr 1fr 1fr auto;
+    grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 1fr) auto;
     align-items: center;
   }
 }
@@ -341,6 +350,7 @@
 
 .admin-review__head {
   display: flex;
+  flex-wrap: wrap;
   align-items: flex-start;
   justify-content: space-between;
   gap: 1rem;
@@ -358,7 +368,7 @@
 
 .admin-review__status--pending {
   background: var(--color-cream);
-  color: var(--color-gold-dark);
+  color: var(--color-accent-dark);
 }
 
 .admin-review__status--approved {
@@ -374,7 +384,7 @@
 .admin-review__rating {
   display: flex;
   gap: 2px;
-  color: var(--color-gold-dark);
+  color: var(--color-accent-dark);
 }
 
 .admin-review__rating .product-card__star {

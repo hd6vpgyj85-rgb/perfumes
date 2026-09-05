@@ -4,7 +4,7 @@
   display: flex;
   align-items: flex-end;
   overflow: hidden;
-  background: radial-gradient(120% 90% at 50% 0%, #2a1d14 0%, var(--color-black) 62%);
+  background: radial-gradient(120% 90% at 50% 0%, #2e1420 0%, var(--color-black) 62%);
 }
 
 .hero__glow {
@@ -14,7 +14,7 @@
   width: 140%;
   height: 60%;
   transform: translateX(-50%);
-  background: radial-gradient(closest-side, rgba(201, 169, 98, 0.25), transparent 70%);
+  background: radial-gradient(closest-side, rgba(226, 0, 111, 0.25), transparent 70%);
   pointer-events: none;
 }
 
@@ -50,9 +50,9 @@
   inset: 0;
   background: linear-gradient(
     to bottom,
-    rgba(11, 10, 8, 0) 40%,
-    rgba(11, 10, 8, 0.55) 68%,
-    rgba(11, 10, 8, 0.96) 100%
+    rgba(10, 10, 10, 0) 40%,
+    rgba(10, 10, 10, 0.55) 68%,
+    rgba(10, 10, 10, 0.96) 100%
   );
   pointer-events: none;
 }
@@ -70,7 +70,7 @@
 }
 
 .eyebrow--light {
-  color: var(--color-gold-light);
+  color: var(--color-accent-light);
 }
 
 .hero__title {
@@ -128,10 +128,10 @@
   .hero__scrim {
     background: linear-gradient(
       to right,
-      rgba(11, 10, 8, 0.97) 0%,
-      rgba(11, 10, 8, 0.75) 42%,
-      rgba(11, 10, 8, 0.15) 68%,
-      rgba(11, 10, 8, 0) 100%
+      rgba(10, 10, 10, 0.97) 0%,
+      rgba(10, 10, 10, 0.75) 42%,
+      rgba(10, 10, 10, 0.15) 68%,
+      rgba(10, 10, 10, 0) 100%
     );
   }
 

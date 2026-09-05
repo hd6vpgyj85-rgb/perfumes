@@ -11,7 +11,7 @@
 }
 
 .header--scrolled {
-  background: rgba(11, 10, 8, 0.92);
+  background: rgba(10, 10, 10, 0.92);
   backdrop-filter: blur(10px);
   box-shadow: 0 12px 30px -20px rgba(0, 0, 0, 0.6);
 }
@@ -78,7 +78,7 @@
   height: 16px;
   padding-inline: 3px;
   border-radius: 999px;
-  background: var(--color-gold);
+  background: var(--color-accent);
   color: var(--color-black);
   font-size: 0.62rem;
   font-weight: 800;
@@ -128,7 +128,7 @@
   font-family: var(--font-serif);
   font-size: 2.1rem;
   color: var(--color-ivory);
-  border-bottom: 1px solid rgba(201, 169, 98, 0.2);
+  border-bottom: 1px solid rgba(226, 0, 111, 0.2);
   padding-bottom: 0.75rem;
   width: fit-content;
 }
@@ -178,7 +178,7 @@
     right: 100%;
     bottom: 0;
     height: 1px;
-    background: var(--color-gold);
+    background: var(--color-accent);
     transition: right var(--dur-fast) var(--ease-editorial);
   }
 
