@@ -1,0 +1,294 @@
+.admin-auth {
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--container-pad);
+  background: var(--color-black);
+}
+
+.admin-auth__card {
+  width: 100%;
+  max-width: 380px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 2.25rem;
+  background: var(--color-ivory);
+  border-radius: var(--radius-md);
+}
+
+.admin-auth__title {
+  font-size: 1.75rem;
+  letter-spacing: 0.1em;
+}
+
+.admin-auth__error {
+  color: #b3443f;
+  font-size: 0.85rem;
+}
+
+.admin-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--color-ink-soft);
+}
+
+.admin-field input,
+.admin-field select,
+.admin-field textarea {
+  padding: 0.65rem 0.75rem;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-sm);
+  font-size: 0.95rem;
+  color: var(--color-ink);
+  background: var(--color-white);
+}
+
+.admin-field--row {
+  flex-direction: row;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.admin-field--row input {
+  width: auto;
+}
+
+.admin-hint {
+  font-size: 0.82rem;
+  color: var(--color-ink-soft);
+}
+
+.admin {
+  min-height: 100svh;
+  background: var(--color-ivory);
+  padding: clamp(1.25rem, 4vw, 2.5rem) var(--container-pad) 4rem;
+}
+
+.admin__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.admin__title {
+  font-size: 1.75rem;
+  letter-spacing: 0.1em;
+}
+
+.admin__toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.admin__toolbar h2 {
+  font-size: 1.3rem;
+}
+
+.admin-table {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.admin-row {
+  display: grid;
+  grid-template-columns: 56px 1fr;
+  grid-template-areas:
+    "media info"
+    "media price"
+    "media stock"
+    "media visible"
+    "actions actions";
+  gap: 0.25rem 1rem;
+  align-items: center;
+  padding: 1rem;
+  background: var(--color-white);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-md);
+}
+
+.admin-row__media {
+  grid-area: media;
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  background: var(--color-cream);
+}
+
+.admin-row__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.admin-row__media-placeholder {
+  width: 100%;
+  height: 100%;
+  background: var(--color-sand);
+}
+
+.admin-row__info {
+  grid-area: info;
+}
+
+.admin-row__name {
+  font-weight: 700;
+}
+
+.admin-row__meta {
+  font-size: 0.8rem;
+  color: var(--color-ink-soft);
+  text-transform: capitalize;
+}
+
+.admin-row__price {
+  grid-area: price;
+  font-weight: 600;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.admin-row__price-prev {
+  color: var(--color-ink-soft);
+  text-decoration: line-through;
+  font-weight: 400;
+}
+
+.admin-row__stock {
+  grid-area: stock;
+  font-size: 0.85rem;
+}
+
+.admin-row__visible {
+  grid-area: visible;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-gold-dark);
+}
+
+.admin-row__actions {
+  grid-area: actions;
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.admin-row__delete {
+  padding: 0.6rem 1rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #b3443f;
+  border: 1px solid #b3443f;
+  border-radius: 2px;
+}
+
+.admin-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 1.5rem;
+  overflow-y: auto;
+  background: rgba(11, 10, 8, 0.6);
+}
+
+.admin-modal__card {
+  width: 100%;
+  max-width: 640px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1.75rem;
+  background: var(--color-ivory);
+  border-radius: var(--radius-md);
+}
+
+.admin-modal__title {
+  font-size: 1.4rem;
+}
+
+.admin-form-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.admin-image-preview {
+  width: 100%;
+  max-width: 220px;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  border-radius: var(--radius-sm);
+  margin-bottom: 0.5rem;
+}
+
+.admin-gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.admin-gallery__item {
+  position: relative;
+  width: 72px;
+  height: 72px;
+}
+
+.admin-gallery__item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: var(--radius-sm);
+}
+
+.admin-gallery__item button {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--color-ink);
+  color: var(--color-ivory);
+  font-size: 0.8rem;
+  line-height: 1;
+}
+
+.admin-modal__actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+@media (min-width: 640px) {
+  .admin-row {
+    grid-template-columns: 56px 2fr 1fr 1fr 1fr auto;
+    grid-template-areas: "media info price stock visible actions";
+  }
+
+  .admin-row__actions {
+    margin-top: 0;
+  }
+
+  .admin-form-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

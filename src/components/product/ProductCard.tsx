@@ -41,7 +41,16 @@ export function ProductCard({ product }: ProductCardProps) {
           <HeartIcon filled={isFavorite} />
         </button>
 
-        <BottlePlaceholder variant={product.category} className="product-card__bottle" />
+        {product.imageUrl ? (
+          <img
+            src={product.imageUrl}
+            alt={`${product.brand} ${product.name}`}
+            className="product-card__bottle product-card__bottle--photo"
+            loading="lazy"
+          />
+        ) : (
+          <BottlePlaceholder variant={product.category} className="product-card__bottle" />
+        )}
 
         {!product.inStock && <span className="product-card__soldout">Agotado</span>}
       </div>

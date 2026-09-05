@@ -1,9 +1,11 @@
-import { products } from "../../data/products";
+import { useStoreProducts } from "../../hooks/useStoreProducts";
 import { ProductCard } from "../product/ProductCard";
 import { Reveal } from "../common/Reveal";
 import "./FeaturedProducts.css";
 
 export function FeaturedProducts() {
+  const { products } = useStoreProducts();
+
   return (
     <section id="destacados" className="featured section">
       <div className="container">
