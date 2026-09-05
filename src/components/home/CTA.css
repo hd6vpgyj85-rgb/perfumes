@@ -1,0 +1,36 @@
+.cta {
+  background: radial-gradient(120% 100% at 50% 0%, #241811 0%, var(--color-black) 70%);
+  padding-block: clamp(4rem, 10vw, 7rem);
+}
+
+.cta__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.cta__inner > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1.1rem;
+}
+
+.cta__line {
+  width: 1px;
+  height: 40px;
+  background: linear-gradient(to bottom, transparent, var(--color-gold), transparent);
+}
+
+.cta__title {
+  color: var(--color-ivory);
+  font-size: clamp(2rem, 5vw, 3rem);
+}
+
+.cta__subtitle {
+  max-width: 46ch;
+  color: rgba(248, 244, 236, 0.75);
+  line-height: 1.7;
+}

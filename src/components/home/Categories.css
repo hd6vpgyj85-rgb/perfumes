@@ -1,0 +1,123 @@
+.categories {
+  background: var(--color-cream);
+}
+
+.categories__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+.category-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 340px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  padding: 2rem 1.75rem;
+  isolation: isolate;
+}
+
+.category-card__bottle {
+  position: absolute;
+  right: -10%;
+  bottom: -8%;
+  width: 62%;
+  height: auto;
+  opacity: 0.9;
+  z-index: -1;
+  transition: transform var(--dur-med) var(--ease-editorial);
+}
+
+.category-card:hover .category-card__bottle {
+  transform: translateY(-8px) scale(1.03);
+}
+
+.category-card__content {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-width: 30ch;
+}
+
+.category-card__eyebrow {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  opacity: 0.75;
+}
+
+.category-card__title {
+  color: inherit;
+  font-size: 1.75rem;
+}
+
+.category-card__desc {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  opacity: 0.85;
+}
+
+.category-card__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  margin-top: 0.5rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: gap var(--dur-fast) var(--ease-editorial);
+}
+
+.category-card:hover .category-card__cta {
+  gap: 0.55rem;
+}
+
+.category-card--dark {
+  background: linear-gradient(160deg, #241811, var(--color-black));
+  color: var(--color-ivory);
+}
+
+.category-card--dark .category-card__eyebrow,
+.category-card--dark .category-card__cta {
+  color: var(--color-gold-light);
+}
+
+.category-card--light {
+  background: linear-gradient(160deg, #ffffff, var(--color-cream));
+  color: var(--color-ink);
+  border: 1px solid var(--color-line);
+}
+
+.category-card--light .category-card__eyebrow,
+.category-card--light .category-card__cta {
+  color: var(--color-gold-dark);
+}
+
+.category-card--editorial {
+  background: linear-gradient(160deg, var(--color-espresso-light), var(--color-espresso));
+  color: var(--color-ivory);
+}
+
+.category-card--editorial .category-card__title {
+  font-style: italic;
+}
+
+.category-card--editorial .category-card__eyebrow,
+.category-card--editorial .category-card__cta {
+  color: var(--color-gold-light);
+}
+
+@media (min-width: 860px) {
+  .categories__grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .category-card {
+    min-height: 420px;
+  }
+}
