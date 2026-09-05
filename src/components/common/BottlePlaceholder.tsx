@@ -4,10 +4,10 @@ import type { PerfumeCategory } from "../../types/product";
 type Variant = PerfumeCategory | "hero";
 
 const palettes: Record<Variant, [string, string, string]> = {
-  arabe: ["#2b1d14", "#c9a962", "#0b0a08"],
-  disenador: ["#efe6d5", "#c9a962", "#f8f4ec"],
-  nicho: ["#3a2a1e", "#e6d5a3", "#221812"],
-  hero: ["#3a2a1e", "#e6d5a3", "#0b0a08"],
+  arabe: ["#1c1013", "#e2006f", "#0a0a0a"],
+  disenador: ["#f5e6ec", "#e2006f", "#faf6f7"],
+  nicho: ["#2e1a20", "#ff6fa8", "#1c1013"],
+  hero: ["#2e1a20", "#ff6fa8", "#0a0a0a"],
 };
 
 interface BottlePlaceholderProps {

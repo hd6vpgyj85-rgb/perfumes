@@ -26,15 +26,15 @@
 }
 
 .product-card__media--arabe {
-  background: linear-gradient(165deg, #241811, #0b0a08);
+  background: linear-gradient(165deg, #1c1013, #0a0a0a);
 }
 
 .product-card__media--disenador {
-  background: linear-gradient(165deg, #f8f4ec, #efe6d5);
+  background: linear-gradient(165deg, #faf6f7, #f5e6ec);
 }
 
 .product-card__media--nicho {
-  background: linear-gradient(165deg, #3a2a1e, #221812);
+  background: linear-gradient(165deg, #2e1a20, #1c1013);
 }
 
 .product-card__bottle {
@@ -68,7 +68,7 @@
 
 .product-card__badge {
   left: 0.75rem;
-  background: var(--color-gold);
+  background: var(--color-accent);
   color: var(--color-black);
 }
 
@@ -109,7 +109,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(11, 10, 8, 0.55);
+  background: rgba(10, 10, 10, 0.55);
   color: var(--color-ivory);
   font-size: 0.78rem;
   font-weight: 700;
@@ -129,7 +129,7 @@
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--color-gold-dark);
+  color: var(--color-accent-dark);
 }
 
 .product-card__name {
@@ -148,7 +148,7 @@
   align-items: center;
   gap: 2px;
   margin-top: 0.2rem;
-  color: var(--color-gold-dark);
+  color: var(--color-accent-dark);
 }
 
 .product-card__star {
@@ -208,7 +208,7 @@
 }
 
 .product-card__add:hover:not(:disabled) {
-  background: var(--color-gold-dark);
+  background: var(--color-accent-dark);
 }
 
 .product-card__add:disabled {
