@@ -82,6 +82,37 @@
   letter-spacing: 0.1em;
 }
 
+.admin-tabbar {
+  display: flex;
+  gap: 0.5rem;
+  overflow-x: auto;
+  margin-bottom: 1.75rem;
+  border-bottom: 1px solid var(--color-line);
+}
+
+.admin-tabbar__tab {
+  padding: 0.75rem 0.25rem;
+  margin-right: 1.25rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  color: var(--color-ink-soft);
+  border-bottom: 2px solid transparent;
+  white-space: nowrap;
+  transition: color var(--dur-fast) var(--ease-editorial),
+    border-color var(--dur-fast) var(--ease-editorial);
+}
+
+.admin-tabbar__tab.is-active {
+  color: var(--color-ink);
+  border-bottom-color: var(--color-gold);
+}
+
+.admin-panel {
+  display: flex;
+  flex-direction: column;
+}
+
 .admin__toolbar {
   display: flex;
   flex-wrap: wrap;
@@ -291,4 +322,78 @@
   .admin-form-grid {
     grid-template-columns: repeat(2, 1fr);
   }
+
+  .admin-coupon {
+    grid-template-columns: 2fr 1fr 1fr auto;
+    align-items: center;
+  }
+}
+
+.admin-review {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  padding: 1rem;
+  background: var(--color-white);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-md);
+}
+
+.admin-review__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.admin-review__status {
+  flex-shrink: 0;
+  padding: 0.25rem 0.6rem;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border-radius: 999px;
+}
+
+.admin-review__status--pending {
+  background: var(--color-cream);
+  color: var(--color-gold-dark);
+}
+
+.admin-review__status--approved {
+  background: rgba(90, 140, 90, 0.15);
+  color: #3f7a3f;
+}
+
+.admin-review__status--rejected {
+  background: rgba(179, 68, 63, 0.12);
+  color: #b3443f;
+}
+
+.admin-review__rating {
+  display: flex;
+  gap: 2px;
+  color: var(--color-gold-dark);
+}
+
+.admin-review__rating .product-card__star {
+  width: 14px;
+  height: 14px;
+}
+
+.admin-review__comment {
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: var(--color-ink-soft);
+}
+
+.admin-coupon {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.5rem;
+  padding: 1rem;
+  background: var(--color-white);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-md);
 }
