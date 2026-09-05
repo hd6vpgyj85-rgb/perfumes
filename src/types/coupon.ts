@@ -11,3 +11,9 @@ export interface Coupon {
   expiresAt: string | null;
   createdAt: string;
 }
+
+export interface AppliedCoupon {
+  code: string;
+  discountType: DiscountType;
+  discountValue: number;
+}

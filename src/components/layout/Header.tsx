@@ -15,7 +15,7 @@ import "./Header.css";
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const { itemCount } = useCart();
+  const { itemCount, openDrawer } = useCart();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -66,7 +66,11 @@ export function Header() {
             <button className="header__icon-btn header__icon-btn--desktop" aria-label="Favoritos">
               <HeartIcon />
             </button>
-            <button className="header__icon-btn header__cart-btn" aria-label="Carrito">
+            <button
+              className="header__icon-btn header__cart-btn"
+              aria-label="Carrito"
+              onClick={openDrawer}
+            >
               <BagIcon />
               {itemCount > 0 && <span className="header__cart-count">{itemCount}</span>}
             </button>
@@ -108,6 +112,17 @@ export function Header() {
           </button>
           <button className="header__icon-btn" aria-label="Buscar">
             <SearchIcon />
+          </button>
+          <button
+            className="header__icon-btn"
+            aria-label="Carrito"
+            onClick={() => {
+              setMenuOpen(false);
+              openDrawer();
+            }}
+          >
+            <BagIcon />
+            {itemCount > 0 && <span className="header__cart-count">{itemCount}</span>}
           </button>
         </div>
       </div>

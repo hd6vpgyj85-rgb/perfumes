@@ -80,3 +80,35 @@ export async function deleteCoupon(id: string): Promise<void> {
   const { error } = await supabase.from("coupons").delete().eq("id", id);
   if (error) throw error;
 }
+
+export interface CouponDiscount {
+  discountType: DiscountType;
+  discountValue: number;
+}
+
+interface RedemptionRow {
+  discount_type: DiscountType;
+  discount_value: number;
+}
+
+/** Valida un código (sin consumir uso) para mostrar el descuento en el carrito. */
+export async function validateCoupon(code: string): Promise<CouponDiscount | null> {
+  if (!supabase || !code.trim()) return null;
+
+  const { data, error } = await supabase.rpc("validate_coupon", { p_code: code.trim() });
+  if (error || !data || (data as RedemptionRow[]).length === 0) return null;
+
+  const row = (data as RedemptionRow[])[0];
+  return { discountType: row.discount_type, discountValue: Number(row.discount_value) };
+}
+
+/** Canjea un código al confirmar el pedido: valida de nuevo y suma un uso. */
+export async function redeemCoupon(code: string): Promise<CouponDiscount | null> {
+  if (!supabase || !code.trim()) return null;
+
+  const { data, error } = await supabase.rpc("redeem_coupon", { p_code: code.trim() });
+  if (error || !data || (data as RedemptionRow[]).length === 0) return null;
+
+  const row = (data as RedemptionRow[])[0];
+  return { discountType: row.discount_type, discountValue: Number(row.discount_value) };
+}
