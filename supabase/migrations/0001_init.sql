@@ -1,5 +1,6 @@
 -- AURUM — esquema inicial: categorías, productos y storage de imágenes.
--- Ejecutar una sola vez en Supabase (SQL Editor) o vía Supabase CLI.
+-- Seguro para volver a ejecutar (idempotente): podés correr todo el
+-- script de nuevo si se cortó a mitad de camino.
 
 create extension if not exists "pgcrypto";
 
@@ -15,11 +16,13 @@ create table if not exists public.categories (
 
 alter table public.categories enable row level security;
 
+drop policy if exists "categories_public_read" on public.categories;
 create policy "categories_public_read"
   on public.categories for select
   to anon, authenticated
   using (true);
 
+drop policy if exists "categories_admin_write" on public.categories;
 create policy "categories_admin_write"
   on public.categories for all
   to authenticated
@@ -58,27 +61,32 @@ create index if not exists products_visible_idx on public.products (visible);
 
 alter table public.products enable row level security;
 
+drop policy if exists "products_public_read_visible" on public.products;
 create policy "products_public_read_visible"
   on public.products for select
   to anon
   using (visible = true);
 
+drop policy if exists "products_admin_read_all" on public.products;
 create policy "products_admin_read_all"
   on public.products for select
   to authenticated
   using (true);
 
+drop policy if exists "products_admin_write" on public.products;
 create policy "products_admin_write"
   on public.products for insert
   to authenticated
   with check (true);
 
+drop policy if exists "products_admin_update" on public.products;
 create policy "products_admin_update"
   on public.products for update
   to authenticated
   using (true)
   with check (true);
 
+drop policy if exists "products_admin_delete" on public.products;
 create policy "products_admin_delete"
   on public.products for delete
   to authenticated
@@ -104,22 +112,26 @@ insert into storage.buckets (id, name, public)
 values ('product-images', 'product-images', true)
 on conflict (id) do nothing;
 
+drop policy if exists "product_images_public_read" on storage.objects;
 create policy "product_images_public_read"
   on storage.objects for select
   to anon, authenticated
   using (bucket_id = 'product-images');
 
+drop policy if exists "product_images_admin_write" on storage.objects;
 create policy "product_images_admin_write"
   on storage.objects for insert
   to authenticated
   with check (bucket_id = 'product-images');
 
+drop policy if exists "product_images_admin_update" on storage.objects;
 create policy "product_images_admin_update"
   on storage.objects for update
   to authenticated
   using (bucket_id = 'product-images')
   with check (bucket_id = 'product-images');
 
+drop policy if exists "product_images_admin_delete" on storage.objects;
 create policy "product_images_admin_delete"
   on storage.objects for delete
   to authenticated
