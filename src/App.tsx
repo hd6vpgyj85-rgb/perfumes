@@ -8,6 +8,7 @@ import { Terms } from "./pages/legal/Terms";
 import { NotFound } from "./pages/NotFound";
 import { AdminLogin } from "./pages/admin/AdminLogin";
 import { AdminDashboard } from "./pages/admin/AdminDashboard";
+import { RequireAuth } from "./components/admin/RequireAuth";
 
 export function App() {
   return (
@@ -21,7 +22,14 @@ export function App() {
         <Route path="*" element={<NotFound />} />
       </Route>
       <Route path="admin/login" element={<AdminLogin />} />
-      <Route path="admin" element={<AdminDashboard />} />
+      <Route
+        path="admin"
+        element={
+          <RequireAuth>
+            <AdminDashboard />
+          </RequireAuth>
+        }
+      />
     </Routes>
   );
 }
