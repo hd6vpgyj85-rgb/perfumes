@@ -1,6 +1,9 @@
 import { Link } from "react-router-dom";
 import { InstagramIcon, TiktokIcon, WhatsappIcon } from "../common/icons";
+import { buildWhatsAppUrl } from "../../lib/whatsapp";
 import "./Footer.css";
+
+const FOOTER_WHATSAPP_URL = buildWhatsAppUrl("¡Hola! Tengo una pregunta sobre AURUM.");
 
 export function Footer() {
   return (
@@ -19,7 +22,13 @@ export function Footer() {
             <a href="#" aria-label="TikTok" className="footer__social-link">
               <TiktokIcon />
             </a>
-            <a href="#" aria-label="WhatsApp" className="footer__social-link">
+            <a
+              href={FOOTER_WHATSAPP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="WhatsApp"
+              className="footer__social-link"
+            >
               <WhatsappIcon />
             </a>
           </div>

@@ -1,7 +1,7 @@
 import type { CartItem } from "../context/CartContext";
 import type { AppliedCoupon } from "../types/coupon";
 
-const WHATSAPP_NUMBER = "526568596503";
+export const WHATSAPP_NUMBER = "526568596503";
 
 const currency = new Intl.NumberFormat("es-MX", {
   style: "currency",
@@ -44,4 +44,8 @@ export function buildWhatsAppMessage({ items, subtotal, discount, total, coupon 
 
 export function buildWhatsAppUrl(message: string): string {
   return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+}
+
+export function buildContactWhatsAppMessage(name: string, message: string): string {
+  return [`¡Hola! Soy ${name}.`, "", message].join("\n");
 }
