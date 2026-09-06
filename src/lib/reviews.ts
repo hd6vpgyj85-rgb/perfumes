@@ -44,6 +44,25 @@ export async function fetchAdminReviews(): Promise<Review[]> {
   return (data as unknown as ReviewRow[]).map(mapRowToReview);
 }
 
+/** Reseñas aprobadas, para mostrar en la tienda pública. */
+export async function fetchApprovedReviews(): Promise<Review[]> {
+  if (!supabase) return [];
+
+  const { data, error } = await supabase
+    .from("reviews")
+    .select("id, product_id, author_name, rating, comment, status, created_at, products ( name, brand )")
+    .eq("status", "approved")
+    .order("created_at", { ascending: false })
+    .limit(9);
+
+  if (error) {
+    console.error("Error al cargar reseñas:", error.message);
+    return [];
+  }
+
+  return (data as unknown as ReviewRow[]).map(mapRowToReview);
+}
+
 export async function updateReviewStatus(id: string, status: ReviewStatus): Promise<void> {
   if (!supabase) throw new Error("Supabase no está configurado.");
   const { error } = await supabase.from("reviews").update({ status }).eq("id", id);

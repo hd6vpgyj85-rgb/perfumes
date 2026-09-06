@@ -1,5 +1,5 @@
 .categories {
-  background: var(--color-cream);
+  background: var(--color-black);
 }
 
 .categories__grid {
@@ -80,6 +80,7 @@
 .category-card--dark {
   background: linear-gradient(160deg, #1c1013, var(--color-black));
   color: var(--color-ivory);
+  border: 1px solid var(--color-line);
 }
 
 .category-card--dark .category-card__eyebrow,
@@ -101,6 +102,7 @@
 .category-card--editorial {
   background: linear-gradient(160deg, var(--color-espresso-light), var(--color-espresso));
   color: var(--color-ivory);
+  border: 1px solid var(--color-line);
 }
 
 .category-card--editorial .category-card__title {
