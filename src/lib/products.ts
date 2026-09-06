@@ -94,6 +94,25 @@ export async function fetchAdminProducts(): Promise<Product[]> {
   return (data as unknown as ProductRow[]).map(mapRowToProduct);
 }
 
+/** Un producto visible por su slug, para la página de detalle. */
+export async function fetchProductBySlug(slug: string): Promise<Product | null> {
+  if (!supabase) return null;
+
+  const { data, error } = await supabase
+    .from("products")
+    .select(PRODUCT_SELECT)
+    .eq("slug", slug)
+    .eq("visible", true)
+    .maybeSingle();
+
+  if (error || !data) {
+    if (error) console.error("Error al cargar el producto:", error.message);
+    return null;
+  }
+
+  return mapRowToProduct(data as unknown as ProductRow);
+}
+
 export async function fetchCategories(): Promise<CategoryRow[]> {
   if (!supabase) return [];
 

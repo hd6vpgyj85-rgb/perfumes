@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, type MouseEvent } from "react";
+import { Link } from "react-router-dom";
 import type { Product } from "../../types/product";
 import { BottlePlaceholder } from "../common/BottlePlaceholder";
 import { BagIcon, HeartIcon, StarIcon } from "../common/icons";
@@ -26,8 +27,14 @@ export function ProductCard({ product }: ProductCardProps) {
   const fullStars = Math.floor(product.rating);
   const hasHalfStar = product.rating - fullStars >= 0.5;
 
+  const stopAndRun = (event: MouseEvent, action: () => void) => {
+    event.preventDefault();
+    event.stopPropagation();
+    action();
+  };
+
   return (
-    <article className="product-card">
+    <Link to={`/producto/${product.slug}`} className="product-card">
       <div className={`product-card__media product-card__media--${product.category}`}>
         <div className="product-card__badges">
           {product.badge && <span className="product-card__badge">{product.badge}</span>}
@@ -38,7 +45,7 @@ export function ProductCard({ product }: ProductCardProps) {
           className={`product-card__fav ${isFavorite ? "is-active" : ""}`}
           aria-label={isFavorite ? "Quitar de favoritos" : "Añadir a favoritos"}
           aria-pressed={isFavorite}
-          onClick={() => setIsFavorite((prev) => !prev)}
+          onClick={(e) => stopAndRun(e, () => setIsFavorite((prev) => !prev))}
         >
           <HeartIcon filled={isFavorite} />
         </button>
@@ -90,12 +97,12 @@ export function ProductCard({ product }: ProductCardProps) {
             className="product-card__add"
             aria-label="Agregar al carrito"
             disabled={!product.inStock}
-            onClick={() => addItem(product)}
+            onClick={(e) => stopAndRun(e, () => addItem(product))}
           >
             <BagIcon />
           </button>
         </div>
       </div>
-    </article>
+    </Link>
   );
 }

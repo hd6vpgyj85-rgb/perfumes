@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { navLinks } from "../../data/navigation";
 import { useCart } from "../../context/CartContext";
 import { SearchOverlay } from "./SearchOverlay";
@@ -18,13 +18,16 @@ export function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const { itemCount, openDrawer } = useCart();
+  const { pathname } = useLocation();
+  const isHome = pathname === "/";
 
   useEffect(() => {
+    if (!isHome) return;
     const onScroll = () => setScrolled(window.scrollY > 24);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  }, [isHome]);
 
   useEffect(() => {
     document.body.style.overflow = menuOpen || searchOpen ? "hidden" : "";
@@ -35,7 +38,7 @@ export function Header() {
 
   return (
     <>
-      <header className={`header ${scrolled ? "header--scrolled" : ""}`}>
+      <header className={`header ${scrolled || !isHome ? "header--scrolled" : ""}`}>
         <div className="container header__inner">
           <button
             className="header__menu-btn"
