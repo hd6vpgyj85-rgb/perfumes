@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { navLinks } from "../../data/navigation";
 import { useCart } from "../../context/CartContext";
+import { SearchOverlay } from "./SearchOverlay";
 import {
   BagIcon,
   CloseIcon,
@@ -15,6 +16,7 @@ import "./Header.css";
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
   const { itemCount, openDrawer } = useCart();
 
   useEffect(() => {
@@ -25,11 +27,11 @@ export function Header() {
   }, []);
 
   useEffect(() => {
-    document.body.style.overflow = menuOpen ? "hidden" : "";
+    document.body.style.overflow = menuOpen || searchOpen ? "hidden" : "";
     return () => {
       document.body.style.overflow = "";
     };
-  }, [menuOpen]);
+  }, [menuOpen, searchOpen]);
 
   return (
     <>
@@ -57,7 +59,11 @@ export function Header() {
           </Link>
 
           <div className="header__actions">
-            <button className="header__icon-btn" aria-label="Buscar">
+            <button
+              className="header__icon-btn"
+              aria-label="Buscar"
+              onClick={() => setSearchOpen(true)}
+            >
               <SearchIcon />
             </button>
             <button className="header__icon-btn header__icon-btn--desktop" aria-label="Mi cuenta">
@@ -110,7 +116,14 @@ export function Header() {
           <button className="header__icon-btn" aria-label="Favoritos">
             <HeartIcon />
           </button>
-          <button className="header__icon-btn" aria-label="Buscar">
+          <button
+            className="header__icon-btn"
+            aria-label="Buscar"
+            onClick={() => {
+              setMenuOpen(false);
+              setSearchOpen(true);
+            }}
+          >
             <SearchIcon />
           </button>
           <button
@@ -126,6 +139,8 @@ export function Header() {
           </button>
         </div>
       </div>
+
+      <SearchOverlay isOpen={searchOpen} onClose={() => setSearchOpen(false)} />
     </>
   );
 }
