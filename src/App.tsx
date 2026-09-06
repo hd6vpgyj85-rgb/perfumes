@@ -2,6 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import { Layout } from "./components/layout/Layout";
 import { Home } from "./pages/Home";
 import { Contact } from "./pages/Contact";
+import { Faq } from "./pages/Faq";
 import { Privacy } from "./pages/legal/Privacy";
 import { Cookies } from "./pages/legal/Cookies";
 import { Terms } from "./pages/legal/Terms";
@@ -18,6 +19,7 @@ export function App() {
         <Route index element={<Home />} />
         <Route path="producto/:slug" element={<ProductDetail />} />
         <Route path="contact" element={<Contact />} />
+        <Route path="faq" element={<Faq />} />
         <Route path="privacy" element={<Privacy />} />
         <Route path="cookies" element={<Cookies />} />
         <Route path="terms" element={<Terms />} />

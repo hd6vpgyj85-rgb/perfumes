@@ -45,7 +45,7 @@ export function Footer() {
         <nav className="footer__col">
           <h4 className="footer__col-title">Ayuda</h4>
           <Link to="/contact">Contacto</Link>
-          <a href="#">Preguntas Frecuentes</a>
+          <Link to="/faq">Preguntas Frecuentes</Link>
         </nav>
 
         <nav className="footer__col">
