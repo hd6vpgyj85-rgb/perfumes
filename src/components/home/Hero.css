@@ -4,7 +4,7 @@
   display: flex;
   align-items: flex-end;
   overflow: hidden;
-  background: radial-gradient(120% 90% at 50% 0%, #2e1420 0%, var(--color-black) 62%);
+  background: radial-gradient(120% 90% at 50% 0%, #241030 0%, var(--color-black) 62%);
 }
 
 .hero__glow {
@@ -14,7 +14,7 @@
   width: 140%;
   height: 60%;
   transform: translateX(-50%);
-  background: radial-gradient(closest-side, rgba(226, 0, 111, 0.25), transparent 70%);
+  background: radial-gradient(closest-side, rgba(124, 47, 201, 0.25), transparent 70%);
   pointer-events: none;
 }
 

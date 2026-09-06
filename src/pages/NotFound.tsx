@@ -6,7 +6,7 @@ export function NotFound() {
       <p className="eyebrow">Error 404</p>
       <h1>Esta página no existe</h1>
       <p>El enlace que buscas no está disponible o fue movido.</p>
-      <Link to="/" className="btn btn-outline btn-outline--dark">
+      <Link to="/" className="btn btn-outline">
         Volver al inicio
       </Link>
     </div>
