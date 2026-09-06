@@ -29,8 +29,10 @@ export function ProductCard({ product }: ProductCardProps) {
   return (
     <article className="product-card">
       <div className={`product-card__media product-card__media--${product.category}`}>
-        {product.badge && <span className="product-card__badge">{product.badge}</span>}
-        {discount && <span className="product-card__discount">-{discount}%</span>}
+        <div className="product-card__badges">
+          {product.badge && <span className="product-card__badge">{product.badge}</span>}
+          {discount && <span className="product-card__discount">-{discount}%</span>}
+        </div>
 
         <button
           className={`product-card__fav ${isFavorite ? "is-active" : ""}`}

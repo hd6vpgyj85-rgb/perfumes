@@ -69,10 +69,6 @@
   color: var(--color-ivory);
 }
 
-.eyebrow--light {
-  color: var(--color-accent-light);
-}
-
 .hero__title {
   font-size: clamp(2.6rem, 9vw, 4.5rem);
   color: var(--color-ivory);
