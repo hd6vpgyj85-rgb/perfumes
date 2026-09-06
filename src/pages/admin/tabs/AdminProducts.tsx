@@ -88,7 +88,7 @@ export function AdminProducts() {
 
               <div className="admin-row__actions">
                 <button
-                  className="btn btn-outline btn-outline--dark"
+                  className="btn btn-outline"
                   onClick={() => setEditing(product)}
                 >
                   Editar

@@ -24,7 +24,7 @@ export function AdminDashboard() {
           <p className="eyebrow">Panel Administrativo</p>
           <h1 className="admin__title">AURUM</h1>
         </div>
-        <button className="btn btn-outline btn-outline--dark" onClick={signOut}>
+        <button className="btn btn-outline" onClick={signOut}>
           Cerrar sesión
         </button>
       </header>
