@@ -6,6 +6,7 @@ import { Privacy } from "./pages/legal/Privacy";
 import { Cookies } from "./pages/legal/Cookies";
 import { Terms } from "./pages/legal/Terms";
 import { NotFound } from "./pages/NotFound";
+import { ProductDetail } from "./pages/product/ProductDetail";
 import { AdminLogin } from "./pages/admin/AdminLogin";
 import { AdminDashboard } from "./pages/admin/AdminDashboard";
 import { RequireAuth } from "./components/admin/RequireAuth";
@@ -15,6 +16,7 @@ export function App() {
     <Routes>
       <Route element={<Layout />}>
         <Route index element={<Home />} />
+        <Route path="producto/:slug" element={<ProductDetail />} />
         <Route path="contact" element={<Contact />} />
         <Route path="privacy" element={<Privacy />} />
         <Route path="cookies" element={<Cookies />} />
