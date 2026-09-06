@@ -112,7 +112,7 @@ export function CouponForm({ coupon, onSaved, onCancel }: CouponFormProps) {
         {error && <p className="admin-auth__error">{error}</p>}
 
         <div className="admin-modal__actions">
-          <button type="button" className="btn btn-outline btn-outline--dark" onClick={onCancel}>
+          <button type="button" className="btn btn-outline" onClick={onCancel}>
             Cancelar
           </button>
           <button type="submit" className="btn btn-primary" disabled={submitting}>

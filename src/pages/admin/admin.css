@@ -14,17 +14,20 @@
   flex-direction: column;
   gap: 1rem;
   padding: 2.25rem;
-  background: var(--color-ivory);
+  background: var(--color-espresso);
+  border: 1px solid var(--color-line);
   border-radius: var(--radius-md);
+  color: var(--color-ivory);
 }
 
 .admin-auth__title {
   font-size: 1.75rem;
   letter-spacing: 0.1em;
+  color: var(--color-ivory);
 }
 
 .admin-auth__error {
-  color: #b3443f;
+  color: #ff8f87;
   font-size: 0.85rem;
 }
 
@@ -34,7 +37,7 @@
   gap: 0.35rem;
   font-size: 0.82rem;
   font-weight: 600;
-  color: var(--color-ink-soft);
+  color: rgba(248, 245, 250, 0.65);
 }
 
 .admin-field input,
@@ -44,8 +47,13 @@
   border: 1px solid var(--color-line);
   border-radius: var(--radius-sm);
   font-size: 0.95rem;
-  color: var(--color-ink);
-  background: var(--color-white);
+  color: var(--color-ivory);
+  background: var(--color-black);
+}
+
+.admin-field input::placeholder,
+.admin-field textarea::placeholder {
+  color: rgba(248, 245, 250, 0.4);
 }
 
 .admin-field--row {
@@ -60,12 +68,13 @@
 
 .admin-hint {
   font-size: 0.82rem;
-  color: var(--color-ink-soft);
+  color: rgba(248, 245, 250, 0.6);
 }
 
 .admin {
   min-height: 100svh;
-  background: var(--color-ivory);
+  background: var(--color-black);
+  color: var(--color-ivory);
   padding: clamp(1.25rem, 4vw, 2.5rem) var(--container-pad) 4rem;
 }
 
@@ -81,6 +90,7 @@
 .admin__title {
   font-size: 1.75rem;
   letter-spacing: 0.1em;
+  color: var(--color-ivory);
 }
 
 .admin-tabbar {
@@ -97,7 +107,7 @@
   font-size: 0.85rem;
   font-weight: 700;
   letter-spacing: 0.03em;
-  color: var(--color-ink-soft);
+  color: rgba(248, 245, 250, 0.55);
   border-bottom: 2px solid transparent;
   white-space: nowrap;
   transition: color var(--dur-fast) var(--ease-editorial),
@@ -105,7 +115,7 @@
 }
 
 .admin-tabbar__tab.is-active {
-  color: var(--color-ink);
+  color: var(--color-ivory);
   border-bottom-color: var(--color-accent);
 }
 
@@ -145,9 +155,10 @@
   gap: 0.25rem 1rem;
   align-items: center;
   padding: 1rem;
-  background: var(--color-white);
+  background: var(--color-espresso);
   border: 1px solid var(--color-line);
   border-radius: var(--radius-md);
+  color: var(--color-ivory);
 }
 
 .admin-row__media {
@@ -156,7 +167,7 @@
   height: 56px;
   border-radius: var(--radius-sm);
   overflow: hidden;
-  background: var(--color-cream);
+  background: var(--color-espresso-light);
 }
 
 .admin-row__media img {
@@ -183,7 +194,7 @@
 
 .admin-row__meta {
   font-size: 0.8rem;
-  color: var(--color-ink-soft);
+  color: rgba(248, 245, 250, 0.6);
   text-transform: capitalize;
   overflow-wrap: break-word;
 }
@@ -198,7 +209,7 @@
 }
 
 .admin-row__price-prev {
-  color: var(--color-ink-soft);
+  color: rgba(248, 245, 250, 0.5);
   text-decoration: line-through;
   font-weight: 400;
 }
@@ -212,7 +223,7 @@
   grid-area: visible;
   font-size: 0.85rem;
   font-weight: 600;
-  color: var(--color-accent-dark);
+  color: var(--color-accent-light);
 }
 
 .admin-row__actions {
@@ -229,8 +240,8 @@
   font-weight: 700;
   letter-spacing: 0.05em;
   text-transform: uppercase;
-  color: #b3443f;
-  border: 1px solid #b3443f;
+  color: #ff8f87;
+  border: 1px solid #ff8f87;
   border-radius: 2px;
 }
 
@@ -243,7 +254,7 @@
   justify-content: center;
   padding: 1.5rem;
   overflow-y: auto;
-  background: rgba(10, 10, 10, 0.6);
+  background: rgba(10, 10, 10, 0.75);
 }
 
 .admin-modal__card {
@@ -253,12 +264,15 @@
   flex-direction: column;
   gap: 1rem;
   padding: 1.75rem;
-  background: var(--color-ivory);
+  background: var(--color-espresso);
+  border: 1px solid var(--color-line);
   border-radius: var(--radius-md);
+  color: var(--color-ivory);
 }
 
 .admin-modal__title {
   font-size: 1.4rem;
+  color: var(--color-ivory);
 }
 
 .admin-form-grid {
@@ -303,8 +317,8 @@
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  background: var(--color-ink);
-  color: var(--color-ivory);
+  background: var(--color-accent);
+  color: var(--color-black);
   font-size: 0.8rem;
   line-height: 1;
 }
@@ -343,9 +357,10 @@
   flex-direction: column;
   gap: 0.6rem;
   padding: 1rem;
-  background: var(--color-white);
+  background: var(--color-espresso);
   border: 1px solid var(--color-line);
   border-radius: var(--radius-md);
+  color: var(--color-ivory);
 }
 
 .admin-review__head {
@@ -367,24 +382,24 @@
 }
 
 .admin-review__status--pending {
-  background: var(--color-cream);
-  color: var(--color-accent-dark);
+  background: rgba(124, 47, 201, 0.18);
+  color: var(--color-accent-light);
 }
 
 .admin-review__status--approved {
-  background: rgba(90, 140, 90, 0.15);
-  color: #3f7a3f;
+  background: rgba(90, 180, 90, 0.15);
+  color: #7cc47c;
 }
 
 .admin-review__status--rejected {
-  background: rgba(179, 68, 63, 0.12);
-  color: #b3443f;
+  background: rgba(255, 143, 135, 0.15);
+  color: #ff8f87;
 }
 
 .admin-review__rating {
   display: flex;
   gap: 2px;
-  color: var(--color-accent-dark);
+  color: var(--color-accent-light);
 }
 
 .admin-review__rating .product-card__star {
@@ -395,7 +410,7 @@
 .admin-review__comment {
   font-size: 0.9rem;
   line-height: 1.55;
-  color: var(--color-ink-soft);
+  color: rgba(248, 245, 250, 0.7);
 }
 
 .admin-coupon {
@@ -403,7 +418,8 @@
   grid-template-columns: 1fr;
   gap: 0.5rem;
   padding: 1rem;
-  background: var(--color-white);
+  background: var(--color-espresso);
   border: 1px solid var(--color-line);
   border-radius: var(--radius-md);
+  color: var(--color-ivory);
 }

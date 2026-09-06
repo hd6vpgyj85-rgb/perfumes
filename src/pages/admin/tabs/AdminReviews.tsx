@@ -80,7 +80,7 @@ export function AdminReviews() {
                 )}
                 {review.status !== "rejected" && (
                   <button
-                    className="btn btn-outline btn-outline--dark"
+                    className="btn btn-outline"
                     onClick={() => handleStatus(review, "rejected")}
                   >
                     Rechazar
