@@ -26,15 +26,15 @@
 }
 
 .product-card__media--arabe {
-  background: linear-gradient(165deg, #1c1013, #0a0a0a);
+  background: linear-gradient(165deg, #1a1024, #0a0a0a);
 }
 
 .product-card__media--disenador {
-  background: linear-gradient(165deg, #faf6f7, #f5e6ec);
+  background: linear-gradient(165deg, #f8f5fa, #efe3f7);
 }
 
 .product-card__media--nicho {
-  background: linear-gradient(165deg, #2e1a20, #1c1013);
+  background: linear-gradient(165deg, #2b1a3d, #1a1024);
 }
 
 .product-card__bottle {

@@ -78,7 +78,7 @@
 }
 
 .category-card--dark {
-  background: linear-gradient(160deg, #1c1013, var(--color-black));
+  background: linear-gradient(160deg, #1a1024, var(--color-black));
   color: var(--color-ivory);
   border: 1px solid var(--color-line);
 }
