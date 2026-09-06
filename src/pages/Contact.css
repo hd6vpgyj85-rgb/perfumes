@@ -1,0 +1,119 @@
+.contact-page {
+  min-height: 70svh;
+  background: var(--color-black);
+  color: var(--color-ivory);
+  padding: clamp(3rem, 8vw, 6rem) 0 clamp(4rem, 8vw, 6rem);
+}
+
+.contact-page__inner {
+  max-width: 560px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.contact-page__title {
+  font-size: clamp(2rem, 5vw, 2.75rem);
+  color: var(--color-ivory);
+}
+
+.contact-page__intro {
+  color: rgba(248, 245, 250, 0.7);
+  line-height: 1.7;
+  margin-bottom: 0.5rem;
+}
+
+.contact-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.25rem 1.5rem;
+  background: var(--color-espresso);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-md);
+  color: var(--color-ivory);
+  transition: border-color var(--dur-fast) var(--ease-editorial);
+}
+
+.contact-card:hover {
+  border-color: var(--color-accent);
+}
+
+.contact-card__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--color-accent);
+  color: var(--color-black);
+}
+
+.contact-card__label {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: rgba(248, 245, 250, 0.6);
+}
+
+.contact-card__value {
+  display: block;
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin-top: 0.15rem;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--color-line);
+}
+
+.contact-form__title {
+  font-family: var(--font-serif);
+  font-size: 1.3rem;
+  color: var(--color-ivory);
+}
+
+.contact-form__field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: rgba(248, 245, 250, 0.65);
+}
+
+.contact-form__field input,
+.contact-form__field textarea {
+  padding: 0.75rem 0.9rem;
+  background: var(--color-espresso);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-sm);
+  color: var(--color-ivory);
+  font-size: 0.95rem;
+  font-family: inherit;
+  resize: vertical;
+}
+
+.contact-form__field input::placeholder,
+.contact-form__field textarea::placeholder {
+  color: rgba(248, 245, 250, 0.4);
+}
+
+.contact-form .btn {
+  align-self: flex-start;
+}
+
+@media (max-width: 380px) {
+  .contact-form .btn {
+    align-self: stretch;
+  }
+}
