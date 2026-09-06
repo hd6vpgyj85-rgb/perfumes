@@ -1,0 +1,125 @@
+.search-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 220;
+  display: flex;
+  flex-direction: column;
+  background: var(--color-ivory);
+  transform: translateY(-100%);
+  opacity: 0;
+  pointer-events: none;
+  overflow-y: auto;
+  transition: transform var(--dur-med) var(--ease-editorial),
+    opacity var(--dur-med) var(--ease-editorial);
+}
+
+.search-overlay.is-open {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.search-overlay__head {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  height: 88px;
+  flex-shrink: 0;
+}
+
+.search-overlay__field {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--color-ink-soft);
+  border-bottom: 1px solid var(--color-line);
+  padding-bottom: 0.5rem;
+}
+
+.search-overlay__field svg {
+  flex-shrink: 0;
+}
+
+.search-overlay__field input {
+  flex: 1;
+  min-width: 0;
+  font-family: var(--font-serif);
+  font-size: 1.3rem;
+  color: var(--color-ink);
+}
+
+.search-overlay__field input::placeholder {
+  color: var(--color-ink-soft);
+}
+
+.search-overlay__results {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding-bottom: 2.5rem;
+}
+
+.search-overlay__hint {
+  padding-top: 2rem;
+  color: var(--color-ink-soft);
+}
+
+.search-result {
+  display: grid;
+  grid-template-columns: 56px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--color-line);
+}
+
+.search-result__media {
+  width: 56px;
+  height: 72px;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  background: var(--color-cream);
+}
+
+.search-result__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.search-result__info {
+  min-width: 0;
+}
+
+.search-result__brand {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-accent-dark);
+}
+
+.search-result__name {
+  font-weight: 600;
+  overflow-wrap: break-word;
+}
+
+.search-result__price {
+  font-size: 0.85rem;
+  color: var(--color-ink-soft);
+}
+
+.search-result__add {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--color-ink);
+  color: var(--color-ivory);
+  flex-shrink: 0;
+}
