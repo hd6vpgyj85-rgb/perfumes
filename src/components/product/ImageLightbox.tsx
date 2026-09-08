@@ -1,4 +1,5 @@
 import { useBodyScrollLock } from "../../hooks/useBodyScrollLock";
+import { useSwipe } from "../../hooks/useSwipe";
 import { CloseIcon, ChevronRightIcon } from "../common/icons";
 import "./ImageLightbox.css";
 
@@ -17,8 +18,10 @@ export function ImageLightbox({ images, activeIndex, onNavigate, onClose }: Imag
   const goPrev = () => onNavigate((activeIndex - 1 + images.length) % images.length);
   const goNext = () => onNavigate((activeIndex + 1) % images.length);
 
+  const swipeHandlers = useSwipe({ onSwipeLeft: goNext, onSwipeRight: goPrev });
+
   return (
-    <div className="image-lightbox" onClick={onClose}>
+    <div className="image-lightbox" onClick={onClose} {...swipeHandlers}>
       <button className="image-lightbox__close" aria-label="Cerrar" onClick={onClose}>
         <CloseIcon />
       </button>
