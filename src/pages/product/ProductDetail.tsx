@@ -21,6 +21,10 @@ const currency = new Intl.NumberFormat("es-MX", {
 
 export function ProductDetail() {
   const { slug } = useParams<{ slug: string }>();
+  return <ProductDetailView key={slug} slug={slug} />;
+}
+
+function ProductDetailView({ slug }: { slug: string | undefined }) {
   const { product, loading, notFound } = useProduct(slug);
   const { reviews } = useProductReviews(product?.id);
   const { products: allProducts } = useStoreProducts();
