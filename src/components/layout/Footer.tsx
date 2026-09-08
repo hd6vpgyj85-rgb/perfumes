@@ -36,10 +36,10 @@ export function Footer() {
 
         <nav className="footer__col">
           <h4 className="footer__col-title">Tienda</h4>
-          <a href="#categorias">Perfumes Árabes</a>
-          <a href="#categorias">Diseñador</a>
-          <a href="#categorias">Nicho</a>
-          <a href="#destacados">Novedades</a>
+          <Link to="/?categoria=arabe#destacados">Perfumes Árabes</Link>
+          <Link to="/?categoria=disenador#destacados">Diseñador</Link>
+          <Link to="/?categoria=nicho#destacados">Nicho</Link>
+          <Link to="/#destacados">Novedades</Link>
           <Link to="/finder">Encuentra tu Perfume</Link>
         </nav>
 

@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { categories } from "../../data/categories";
 import { ChevronRightIcon } from "../common/icons";
 import { BottlePlaceholder } from "../common/BottlePlaceholder";
@@ -20,8 +21,8 @@ export function Categories() {
         <div className="categories__grid">
           {categories.map((category, index) => (
             <Reveal key={category.id} delay={index * 100}>
-              <a
-                href={category.href}
+              <Link
+                to={category.href}
                 className={`category-card category-card--${category.variant}`}
               >
                 <BottlePlaceholder variant={category.id} className="category-card__bottle" />
@@ -34,7 +35,7 @@ export function Categories() {
                     <ChevronRightIcon />
                   </span>
                 </div>
-              </a>
+              </Link>
             </Reveal>
           ))}
         </div>

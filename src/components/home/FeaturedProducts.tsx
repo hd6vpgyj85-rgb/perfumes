@@ -1,17 +1,31 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import { useStoreProducts } from "../../hooks/useStoreProducts";
 import { ProductCard } from "../product/ProductCard";
 import { ProductFilters, type ProductFiltersValue } from "../product/ProductFilters";
 import { Reveal } from "../common/Reveal";
+import type { PerfumeCategory } from "../../types/product";
 import "./FeaturedProducts.css";
+
+const VALID_CATEGORIES: PerfumeCategory[] = ["arabe", "disenador", "nicho"];
+
+function readCategoryParam(value: string | null): PerfumeCategory | "all" {
+  return VALID_CATEGORIES.includes(value as PerfumeCategory) ? (value as PerfumeCategory) : "all";
+}
 
 export function FeaturedProducts() {
   const { products } = useStoreProducts();
+  const [searchParams] = useSearchParams();
   const [filters, setFilters] = useState<ProductFiltersValue>({
-    category: "all",
+    category: readCategoryParam(searchParams.get("categoria")),
     brand: "all",
     price: "all",
   });
+
+  useEffect(() => {
+    const category = readCategoryParam(searchParams.get("categoria"));
+    setFilters((current) => (current.category === category ? current : { ...current, category }));
+  }, [searchParams]);
 
   const brands = useMemo(
     () => Array.from(new Set(products.map((p) => p.brand))).sort((a, b) => a.localeCompare(b)),

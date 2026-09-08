@@ -19,7 +19,7 @@ export const categories: CategoryInfo[] = [
     description:
       "Oud, ámbar y resinas envolventes. Fragancias intensas nacidas de la tradición perfumista de Oriente.",
     cta: "Explorar colección",
-    href: "#",
+    href: "/?categoria=arabe#destacados",
   },
   {
     id: "disenador",
@@ -29,7 +29,7 @@ export const categories: CategoryInfo[] = [
     description:
       "Firmas icónicas de las grandes casas. Elegancia contemporánea con acabados atemporales.",
     cta: "Explorar colección",
-    href: "#",
+    href: "/?categoria=disenador#destacados",
   },
   {
     id: "nicho",
@@ -39,6 +39,6 @@ export const categories: CategoryInfo[] = [
     description:
       "Composiciones de autor en ediciones reducidas. Perfumería como expresión artística.",
     cta: "Explorar colección",
-    href: "#",
+    href: "/?categoria=nicho#destacados",
   },
 ];
