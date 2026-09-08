@@ -2,9 +2,10 @@ import type { MouseEvent } from "react";
 import { Link } from "react-router-dom";
 import type { Product } from "../../types/product";
 import { BottlePlaceholder } from "../common/BottlePlaceholder";
-import { BagIcon, HeartIcon, StarIcon } from "../common/icons";
+import { BagIcon, HeartIcon, SearchIcon, StarIcon } from "../common/icons";
 import { useCart } from "../../context/CartContext";
 import { useWishlist } from "../../context/WishlistContext";
+import { useQuickView } from "../../context/QuickViewContext";
 import "./ProductCard.css";
 
 interface ProductCardProps {
@@ -20,6 +21,7 @@ const currency = new Intl.NumberFormat("es-MX", {
 export function ProductCard({ product }: ProductCardProps) {
   const { addItem } = useCart();
   const { isFavorite, toggleFavorite } = useWishlist();
+  const { openQuickView } = useQuickView();
   const favorite = isFavorite(product.id);
 
   const discount = product.previousPrice
@@ -37,7 +39,14 @@ export function ProductCard({ product }: ProductCardProps) {
 
   return (
     <Link to={`/producto/${product.slug}`} className="product-card">
-      <div className={`product-card__media product-card__media--${product.category}`}>
+      <div
+        className={`product-card__media product-card__media--${product.category}`}
+        onClick={(e) => stopAndRun(e, () => openQuickView(product))}
+      >
+        <span className="product-card__zoom" aria-hidden="true">
+          <SearchIcon />
+        </span>
+
         <div className="product-card__badges">
           {product.badge && <span className="product-card__badge">{product.badge}</span>}
           {discount && <span className="product-card__discount">-{discount}%</span>}
