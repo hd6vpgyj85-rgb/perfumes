@@ -41,30 +41,30 @@ export function AdminCoupons() {
         <div className="admin-table">
           {coupons.map((coupon) => (
             <div key={coupon.id} className="admin-coupon">
-              <div>
-                <p className="admin-row__name">{coupon.code}</p>
+              <div className="admin-coupon__info">
+                <div className="admin-coupon__head">
+                  <p className="admin-row__name">{coupon.code}</p>
+                  <span
+                    className={`admin-coupon__status ${coupon.active ? "is-active" : ""}`}
+                  >
+                    {coupon.active ? "Activo" : "Inactivo"}
+                  </span>
+                </div>
                 <p className="admin-row__meta">
                   {coupon.discountType === "percentage"
                     ? `${coupon.discountValue}% de descuento`
                     : `$${coupon.discountValue} de descuento`}
+                  {" · "}
+                  {coupon.usesCount}
+                  {coupon.maxUses != null ? ` / ${coupon.maxUses}` : ""} usos
                 </p>
               </div>
 
-              <div className="admin-row__meta">
-                {coupon.usesCount}
-                {coupon.maxUses != null ? ` / ${coupon.maxUses}` : ""} usos
-              </div>
-
-              <div className="admin-row__visible">{coupon.active ? "Activo" : "Inactivo"}</div>
-
-              <div className="admin-row__actions">
-                <button
-                  className="btn btn-outline"
-                  onClick={() => setEditing(coupon)}
-                >
+              <div className="admin-coupon__actions">
+                <button className="admin-coupon__edit" onClick={() => setEditing(coupon)}>
                   Editar
                 </button>
-                <button className="admin-row__delete" onClick={() => handleDelete(coupon)}>
+                <button className="admin-coupon__delete" onClick={() => handleDelete(coupon)}>
                   Eliminar
                 </button>
               </div>
