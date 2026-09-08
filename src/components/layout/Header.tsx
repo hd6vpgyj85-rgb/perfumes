@@ -52,9 +52,9 @@ export function Header() {
 
           <nav className="header__nav">
             {navLinks.map((link) => (
-              <a key={link.label} href={link.href} className="header__nav-link">
+              <Link key={link.label} to={link.href} className="header__nav-link">
                 {link.label}
-              </a>
+              </Link>
             ))}
           </nav>
 
@@ -104,14 +104,14 @@ export function Header() {
 
         <nav className="mobile-menu__nav">
           {navLinks.map((link) => (
-            <a
+            <Link
               key={link.label}
-              href={link.href}
+              to={link.href}
               className="mobile-menu__link"
               onClick={() => setMenuOpen(false)}
             >
               {link.label}
-            </a>
+            </Link>
           ))}
         </nav>
 
