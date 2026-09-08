@@ -345,11 +345,6 @@
   .admin-form-grid {
     grid-template-columns: repeat(2, 1fr);
   }
-
-  .admin-coupon {
-    grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 1fr) auto;
-    align-items: center;
-  }
 }
 
 .admin-review {
@@ -414,12 +409,107 @@
 }
 
 .admin-coupon {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
   padding: 1rem;
   background: var(--color-espresso);
   border: 1px solid var(--color-line);
   border-radius: var(--radius-md);
   color: var(--color-ivory);
+}
+
+.admin-coupon__info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  min-width: 0;
+}
+
+.admin-coupon__head {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.admin-coupon__head .admin-row__name {
+  flex: 1;
+  min-width: 0;
+}
+
+.admin-coupon__status {
+  flex-shrink: 0;
+  padding: 0.2rem 0.55rem;
+  font-size: 0.64rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border-radius: 999px;
+  background: rgba(248, 245, 250, 0.08);
+  color: rgba(248, 245, 250, 0.55);
+}
+
+.admin-coupon__status.is-active {
+  background: rgba(124, 47, 201, 0.18);
+  color: var(--color-accent-light);
+}
+
+.admin-coupon__actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.admin-coupon__edit,
+.admin-coupon__delete {
+  flex: 1;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  text-align: center;
+  border-radius: 999px;
+  transition: border-color var(--dur-fast) var(--ease-editorial),
+    background var(--dur-fast) var(--ease-editorial),
+    color var(--dur-fast) var(--ease-editorial);
+}
+
+.admin-coupon__edit {
+  background: transparent;
+  border: 1px solid var(--color-line);
+  color: var(--color-ivory);
+}
+
+.admin-coupon__edit:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent-light);
+}
+
+.admin-coupon__delete {
+  background: transparent;
+  border: 1px solid rgba(255, 143, 135, 0.35);
+  color: #ff8f87;
+}
+
+.admin-coupon__delete:hover {
+  background: rgba(255, 143, 135, 0.1);
+}
+
+@media (min-width: 640px) {
+  .admin-coupon {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .admin-coupon__actions {
+    flex-shrink: 0;
+  }
+
+  .admin-coupon__edit,
+  .admin-coupon__delete {
+    flex: none;
+    min-width: 88px;
+  }
 }
