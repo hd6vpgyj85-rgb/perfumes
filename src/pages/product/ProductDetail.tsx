@@ -4,6 +4,7 @@ import { useProduct } from "../../hooks/useProduct";
 import { useProductReviews } from "../../hooks/useProductReviews";
 import { useStoreProducts } from "../../hooks/useStoreProducts";
 import { useCart } from "../../context/CartContext";
+import { useWishlist } from "../../context/WishlistContext";
 import { categories } from "../../data/categories";
 import { BottlePlaceholder } from "../../components/common/BottlePlaceholder";
 import { StarIcon, HeartIcon, BagIcon } from "../../components/common/icons";
@@ -23,9 +24,9 @@ export function ProductDetail() {
   const { reviews } = useProductReviews(product?.id);
   const { products: allProducts } = useStoreProducts();
   const { addItem } = useCart();
+  const { isFavorite, toggleFavorite } = useWishlist();
   const [quantity, setQuantity] = useState(1);
   const [activeImage, setActiveImage] = useState<string | null>(null);
-  const [isFavorite, setIsFavorite] = useState(false);
 
   if (notFound) return <NotFound />;
   if (loading || !product) {
@@ -140,12 +141,12 @@ export function ProductDetail() {
               </button>
 
               <button
-                className={`product-detail__fav ${isFavorite ? "is-active" : ""}`}
-                aria-label="Añadir a favoritos"
-                aria-pressed={isFavorite}
-                onClick={() => setIsFavorite((v) => !v)}
+                className={`product-detail__fav ${isFavorite(product.id) ? "is-active" : ""}`}
+                aria-label={isFavorite(product.id) ? "Quitar de favoritos" : "Añadir a favoritos"}
+                aria-pressed={isFavorite(product.id)}
+                onClick={() => toggleFavorite(product)}
               >
-                <HeartIcon filled={isFavorite} />
+                <HeartIcon filled={isFavorite(product.id)} />
               </button>
             </div>
           )}

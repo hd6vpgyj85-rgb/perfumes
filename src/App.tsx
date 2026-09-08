@@ -3,6 +3,7 @@ import { Layout } from "./components/layout/Layout";
 import { Home } from "./pages/Home";
 import { Contact } from "./pages/Contact";
 import { Faq } from "./pages/Faq";
+import { Wishlist } from "./pages/Wishlist";
 import { Privacy } from "./pages/legal/Privacy";
 import { Cookies } from "./pages/legal/Cookies";
 import { Terms } from "./pages/legal/Terms";
@@ -20,6 +21,7 @@ export function App() {
         <Route path="producto/:slug" element={<ProductDetail />} />
         <Route path="contact" element={<Contact />} />
         <Route path="faq" element={<Faq />} />
+        <Route path="favoritos" element={<Wishlist />} />
         <Route path="privacy" element={<Privacy />} />
         <Route path="cookies" element={<Cookies />} />
         <Route path="terms" element={<Terms />} />

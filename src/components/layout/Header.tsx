@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { navLinks } from "../../data/navigation";
 import { useCart } from "../../context/CartContext";
+import { useWishlist } from "../../context/WishlistContext";
 import { SearchOverlay } from "./SearchOverlay";
 import {
   BagIcon,
@@ -18,6 +19,7 @@ export function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const { itemCount, openDrawer } = useCart();
+  const { itemCount: favoritesCount } = useWishlist();
   const { pathname } = useLocation();
   const isHome = pathname === "/";
 
@@ -72,9 +74,14 @@ export function Header() {
             <button className="header__icon-btn header__icon-btn--desktop" aria-label="Mi cuenta">
               <UserIcon />
             </button>
-            <button className="header__icon-btn header__icon-btn--desktop" aria-label="Favoritos">
+            <Link
+              to="/favoritos"
+              className="header__icon-btn header__icon-btn--desktop header__cart-btn"
+              aria-label="Favoritos"
+            >
               <HeartIcon />
-            </button>
+              {favoritesCount > 0 && <span className="header__cart-count">{favoritesCount}</span>}
+            </Link>
             <button
               className="header__icon-btn header__cart-btn"
               aria-label="Carrito"
@@ -116,9 +123,15 @@ export function Header() {
           <button className="header__icon-btn" aria-label="Mi cuenta">
             <UserIcon />
           </button>
-          <button className="header__icon-btn" aria-label="Favoritos">
+          <Link
+            to="/favoritos"
+            className="header__icon-btn header__cart-btn"
+            aria-label="Favoritos"
+            onClick={() => setMenuOpen(false)}
+          >
             <HeartIcon />
-          </button>
+            {favoritesCount > 0 && <span className="header__cart-count">{favoritesCount}</span>}
+          </Link>
           <button
             className="header__icon-btn"
             aria-label="Buscar"
