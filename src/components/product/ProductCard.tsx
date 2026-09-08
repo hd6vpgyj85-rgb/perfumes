@@ -1,9 +1,10 @@
-import { useState, type MouseEvent } from "react";
+import type { MouseEvent } from "react";
 import { Link } from "react-router-dom";
 import type { Product } from "../../types/product";
 import { BottlePlaceholder } from "../common/BottlePlaceholder";
 import { BagIcon, HeartIcon, StarIcon } from "../common/icons";
 import { useCart } from "../../context/CartContext";
+import { useWishlist } from "../../context/WishlistContext";
 import "./ProductCard.css";
 
 interface ProductCardProps {
@@ -17,8 +18,9 @@ const currency = new Intl.NumberFormat("es-MX", {
 });
 
 export function ProductCard({ product }: ProductCardProps) {
-  const [isFavorite, setIsFavorite] = useState(false);
   const { addItem } = useCart();
+  const { isFavorite, toggleFavorite } = useWishlist();
+  const favorite = isFavorite(product.id);
 
   const discount = product.previousPrice
     ? Math.round(100 - (product.price / product.previousPrice) * 100)
@@ -42,12 +44,12 @@ export function ProductCard({ product }: ProductCardProps) {
         </div>
 
         <button
-          className={`product-card__fav ${isFavorite ? "is-active" : ""}`}
-          aria-label={isFavorite ? "Quitar de favoritos" : "Añadir a favoritos"}
-          aria-pressed={isFavorite}
-          onClick={(e) => stopAndRun(e, () => setIsFavorite((prev) => !prev))}
+          className={`product-card__fav ${favorite ? "is-active" : ""}`}
+          aria-label={favorite ? "Quitar de favoritos" : "Añadir a favoritos"}
+          aria-pressed={favorite}
+          onClick={(e) => stopAndRun(e, () => toggleFavorite(product))}
         >
-          <HeartIcon filled={isFavorite} />
+          <HeartIcon filled={favorite} />
         </button>
 
         {product.imageUrl ? (
