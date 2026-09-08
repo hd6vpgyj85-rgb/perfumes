@@ -77,10 +77,29 @@
 }
 
 .footer__bottom {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
   border-top: 1px solid rgba(255, 255, 255, 0.08);
   padding-block: 1.5rem;
   font-size: 0.78rem;
   text-align: center;
+}
+
+.footer__admin-link {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.footer__admin-link:hover {
+  color: var(--color-accent-light);
+}
+
+@media (min-width: 720px) {
+  .footer__bottom {
+    flex-direction: row;
+    justify-content: space-between;
+  }
 }
 
 @media (min-width: 720px) {
