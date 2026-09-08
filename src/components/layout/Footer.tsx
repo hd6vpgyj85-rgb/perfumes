@@ -59,6 +59,9 @@ export function Footer() {
 
       <div className="container footer__bottom">
         <p>© {new Date().getFullYear()} AURUM. Todos los derechos reservados.</p>
+        <Link to="/admin" className="footer__admin-link">
+          Panel Administrativo
+        </Link>
       </div>
     </footer>
   );
