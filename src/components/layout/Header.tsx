@@ -11,6 +11,7 @@ import {
   HeartIcon,
   MenuIcon,
   SearchIcon,
+  UserIcon,
 } from "../common/icons";
 import "./Header.css";
 
@@ -82,6 +83,13 @@ export function Header() {
               <BagIcon />
               {itemCount > 0 && <span className="header__cart-count">{itemCount}</span>}
             </button>
+            <Link
+              to="/admin"
+              className="header__icon-btn header__icon-btn--desktop"
+              aria-label="Panel Administrativo"
+            >
+              <UserIcon />
+            </Link>
           </div>
         </div>
       </header>
@@ -142,6 +150,14 @@ export function Header() {
             <BagIcon />
             {itemCount > 0 && <span className="header__cart-count">{itemCount}</span>}
           </button>
+          <Link
+            to="/admin"
+            className="header__icon-btn"
+            aria-label="Panel Administrativo"
+            onClick={() => setMenuOpen(false)}
+          >
+            <UserIcon />
+          </Link>
         </div>
       </div>
 
