@@ -1,7 +1,8 @@
-import { useEffect, useState, type FormEvent } from "react";
+import { useState, type FormEvent } from "react";
 import { useCart } from "../../context/CartContext";
 import { redeemCoupon } from "../../lib/coupons";
 import { buildWhatsAppMessage, buildWhatsAppUrl } from "../../lib/whatsapp";
+import { useBodyScrollLock } from "../../hooks/useBodyScrollLock";
 import { BottlePlaceholder } from "../common/BottlePlaceholder";
 import { CloseIcon } from "../common/icons";
 import "./CartDrawer.css";
@@ -33,12 +34,7 @@ export function CartDrawer() {
   const [applying, setApplying] = useState(false);
   const [sending, setSending] = useState(false);
 
-  useEffect(() => {
-    document.body.style.overflow = isDrawerOpen ? "hidden" : "";
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [isDrawerOpen]);
+  useBodyScrollLock(isDrawerOpen);
 
   const handleApplyCoupon = async (event: FormEvent) => {
     event.preventDefault();
