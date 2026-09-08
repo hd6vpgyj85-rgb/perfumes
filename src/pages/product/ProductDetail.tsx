@@ -9,6 +9,7 @@ import { categories } from "../../data/categories";
 import { BottlePlaceholder } from "../../components/common/BottlePlaceholder";
 import { StarIcon, HeartIcon, BagIcon } from "../../components/common/icons";
 import { ProductCard } from "../../components/product/ProductCard";
+import { ImageLightbox } from "../../components/product/ImageLightbox";
 import { NotFound } from "../NotFound";
 import "./ProductDetail.css";
 
@@ -27,6 +28,7 @@ export function ProductDetail() {
   const { isFavorite, toggleFavorite } = useWishlist();
   const [quantity, setQuantity] = useState(1);
   const [activeImage, setActiveImage] = useState<string | null>(null);
+  const [lightboxOpen, setLightboxOpen] = useState(false);
 
   if (notFound) return <NotFound />;
   if (loading || !product) {
@@ -66,7 +68,10 @@ export function ProductDetail() {
 
       <div className="container product-detail__layout">
         <div className="product-detail__gallery">
-          <div className={`product-detail__main-image product-detail__main-image--${product.category}`}>
+          <div
+            className={`product-detail__main-image product-detail__main-image--${product.category} ${mainImage ? "is-zoomable" : ""}`}
+            onClick={() => mainImage && setLightboxOpen(true)}
+          >
             {mainImage ? (
               <img src={mainImage} alt={`${product.brand} ${product.name}`} />
             ) : (
@@ -186,6 +191,15 @@ export function ProductDetail() {
             ))}
           </div>
         </div>
+      )}
+
+      {lightboxOpen && images.length > 0 && (
+        <ImageLightbox
+          images={images}
+          activeIndex={Math.max(0, images.indexOf(mainImage ?? images[0]))}
+          onNavigate={(index) => setActiveImage(images[index])}
+          onClose={() => setLightboxOpen(false)}
+        />
       )}
     </div>
   );

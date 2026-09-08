@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { navLinks } from "../../data/navigation";
 import { useCart } from "../../context/CartContext";
 import { useWishlist } from "../../context/WishlistContext";
+import { useBodyScrollLock } from "../../hooks/useBodyScrollLock";
 import { SearchOverlay } from "./SearchOverlay";
 import {
   BagIcon,
@@ -30,12 +31,7 @@ export function Header() {
     return () => window.removeEventListener("scroll", onScroll);
   }, [isHome]);
 
-  useEffect(() => {
-    document.body.style.overflow = menuOpen || searchOpen ? "hidden" : "";
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [menuOpen, searchOpen]);
+  useBodyScrollLock(menuOpen || searchOpen);
 
   return (
     <>

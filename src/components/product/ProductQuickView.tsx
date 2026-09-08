@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useQuickView } from "../../context/QuickViewContext";
 import { useCart } from "../../context/CartContext";
 import { useWishlist } from "../../context/WishlistContext";
+import { useBodyScrollLock } from "../../hooks/useBodyScrollLock";
 import { BottlePlaceholder } from "../common/BottlePlaceholder";
 import { BagIcon, CloseIcon, HeartIcon, StarIcon } from "../common/icons";
 import "./ProductQuickView.css";
@@ -16,6 +17,8 @@ export function ProductQuickView() {
   const { product, closeQuickView } = useQuickView();
   const { addItem } = useCart();
   const { isFavorite, toggleFavorite } = useWishlist();
+
+  useBodyScrollLock(Boolean(product));
 
   if (!product) return null;
 
