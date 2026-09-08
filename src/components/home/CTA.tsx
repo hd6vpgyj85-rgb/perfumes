@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { Reveal } from "../common/Reveal";
 import "./CTA.css";
 
@@ -16,9 +17,9 @@ export function CTA() {
             Descubre una selección de perfumes árabes, de diseñador y de
             nicho, elegidos para durar en la memoria de quien te rodea.
           </p>
-          <a href="#destacados" className="btn btn-primary">
+          <Link to="/finder" className="btn btn-primary">
             Descubrir Ahora
-          </a>
+          </Link>
           <span className="cta__line" aria-hidden="true" />
         </Reveal>
       </div>

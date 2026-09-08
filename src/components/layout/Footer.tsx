@@ -40,6 +40,7 @@ export function Footer() {
           <a href="#categorias">Diseñador</a>
           <a href="#categorias">Nicho</a>
           <a href="#destacados">Novedades</a>
+          <Link to="/finder">Encuentra tu Perfume</Link>
         </nav>
 
         <nav className="footer__col">
