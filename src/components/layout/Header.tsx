@@ -10,7 +10,6 @@ import {
   HeartIcon,
   MenuIcon,
   SearchIcon,
-  UserIcon,
 } from "../common/icons";
 import "./Header.css";
 
@@ -71,9 +70,6 @@ export function Header() {
             >
               <SearchIcon />
             </button>
-            <button className="header__icon-btn header__icon-btn--desktop" aria-label="Mi cuenta">
-              <UserIcon />
-            </button>
             <Link
               to="/favoritos"
               className="header__icon-btn header__icon-btn--desktop header__cart-btn"
@@ -120,9 +116,6 @@ export function Header() {
         </nav>
 
         <div className="mobile-menu__footer">
-          <button className="header__icon-btn" aria-label="Mi cuenta">
-            <UserIcon />
-          </button>
           <Link
             to="/favoritos"
             className="header__icon-btn header__cart-btn"

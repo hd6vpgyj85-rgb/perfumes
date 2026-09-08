@@ -1,0 +1,210 @@
+.quick-view {
+  position: fixed;
+  inset: 0;
+  z-index: 280;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.25rem;
+  overflow-y: auto;
+  background: rgba(10, 10, 10, 0.75);
+}
+
+.quick-view__card {
+  position: relative;
+  width: 100%;
+  max-width: 720px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  background: var(--color-black);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+@media (min-width: 640px) {
+  .quick-view__card {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+}
+
+.quick-view__close {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  z-index: 2;
+  width: 36px;
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(10, 10, 10, 0.6);
+  color: var(--color-ivory);
+}
+
+.quick-view__media {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 3 / 4;
+  padding: 2rem;
+  overflow: hidden;
+}
+
+.quick-view__media--arabe {
+  background: linear-gradient(165deg, #1a1024, #0a0a0a);
+}
+
+.quick-view__media--disenador {
+  background: linear-gradient(165deg, #f8f5fa, #efe3f7);
+}
+
+.quick-view__media--nicho {
+  background: linear-gradient(165deg, #2b1a3d, #1a1024);
+}
+
+.quick-view__media img,
+.quick-view__bottle {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.quick-view__discount {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 1;
+  font-size: 0.6rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.3rem 0.5rem;
+  border-radius: 2px;
+  background: var(--color-ink);
+  color: var(--color-ivory);
+}
+
+.quick-view__soldout {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(10, 10, 10, 0.55);
+  color: var(--color-ivory);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.quick-view__body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding: 1.75rem;
+  color: var(--color-ivory);
+}
+
+.quick-view__brand {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-accent-light);
+}
+
+.quick-view__name {
+  font-size: 1.5rem;
+  color: var(--color-ivory);
+}
+
+.quick-view__concentration {
+  font-size: 0.85rem;
+  color: rgba(248, 245, 250, 0.6);
+}
+
+.quick-view__rating {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  margin-top: 0.3rem;
+  color: var(--color-accent-light);
+}
+
+.quick-view__star {
+  width: 14px;
+  height: 14px;
+}
+
+.quick-view__reviews {
+  margin-left: 0.35rem;
+  font-size: 0.78rem;
+  color: rgba(248, 245, 250, 0.6);
+}
+
+.quick-view__prices {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  margin-top: 0.6rem;
+}
+
+.quick-view__price {
+  font-family: var(--font-serif);
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--color-ivory);
+}
+
+.quick-view__price-prev {
+  font-size: 0.9rem;
+  color: rgba(248, 245, 250, 0.5);
+  text-decoration: line-through;
+}
+
+.quick-view__actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.quick-view__add {
+  flex: 1;
+}
+
+.quick-view__fav {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--color-espresso);
+  border: 1px solid var(--color-line);
+  color: var(--color-ivory);
+  transition: transform var(--dur-fast) var(--ease-editorial),
+    color var(--dur-fast) var(--ease-editorial);
+}
+
+.quick-view__fav:hover {
+  transform: scale(1.06);
+}
+
+.quick-view__fav.is-active {
+  color: #ff8f87;
+  border-color: #ff8f87;
+}
+
+.quick-view__link {
+  margin-top: 0.75rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: underline;
+  color: rgba(248, 245, 250, 0.7);
+}

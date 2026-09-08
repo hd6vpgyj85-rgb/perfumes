@@ -146,6 +146,7 @@ h4 {
 }
 
 .reveal {
+  height: 100%;
   opacity: 0;
   transform: translateY(18px);
   transition: opacity 700ms var(--ease-editorial), transform 700ms var(--ease-editorial);
