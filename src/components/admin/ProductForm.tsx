@@ -3,6 +3,7 @@ import type { Product, ProductLevel, PerfumeCategory } from "../../types/product
 import type { CategoryRow, ProductInput } from "../../lib/products";
 import { createProduct, updateProduct, uploadProductImage } from "../../lib/products";
 import { slugify } from "../../lib/slugify";
+import { calculateProfit } from "../../lib/profit";
 
 interface ProductFormProps {
   product: Product | null;
@@ -12,6 +13,37 @@ interface ProductFormProps {
 }
 
 const LEVELS: ProductLevel[] = ["principiante", "intermedio", "avanzado"];
+
+const currency = new Intl.NumberFormat("es-MX", {
+  style: "currency",
+  currency: "USD",
+  maximumFractionDigits: 2,
+});
+
+function ProfitPreview({
+  price,
+  costPrice,
+  shippingCost,
+}: {
+  price: string;
+  costPrice: string;
+  shippingCost: string;
+}) {
+  const { profit, marginPercent } = calculateProfit(
+    Number(price) || 0,
+    Number(costPrice) || 0,
+    Number(shippingCost) || 0,
+  );
+  const isLoss = profit <= 0;
+
+  return (
+    <div className={`admin-profit-preview ${isLoss ? "is-loss" : ""}`}>
+      <span>Ganancia estimada: {currency.format(profit)}</span>
+      {marginPercent != null && <span>{marginPercent.toFixed(0)}% sobre el costo</span>}
+      {isLoss && <span>Estás perdiendo dinero con este precio</span>}
+    </div>
+  );
+}
 
 export function ProductForm({ product, categories, onSaved, onCancel }: ProductFormProps) {
   const [name, setName] = useState(product?.name ?? "");
@@ -28,6 +60,12 @@ export function ProductForm({ product, categories, onSaved, onCancel }: ProductF
     product?.previousPrice != null ? String(product.previousPrice) : "",
   );
   const [stock, setStock] = useState(String(product?.stock ?? 0));
+  const [costPrice, setCostPrice] = useState(
+    product?.costPrice != null ? String(product.costPrice) : "",
+  );
+  const [shippingCost, setShippingCost] = useState(
+    product?.shippingCost != null ? String(product.shippingCost) : "",
+  );
   const [sku, setSku] = useState(product?.sku ?? "");
   const [level, setLevel] = useState<ProductLevel | "">(product?.level ?? "");
   const [badge, setBadge] = useState(product?.badge ?? "");
@@ -107,6 +145,8 @@ export function ProductForm({ product, categories, onSaved, onCancel }: ProductF
       imageUrl: imageUrl || null,
       gallery,
       visible,
+      costPrice: costPrice ? Number(costPrice) : null,
+      shippingCost: shippingCost ? Number(shippingCost) : null,
     };
 
     setSubmitting(true);
@@ -210,6 +250,29 @@ export function ProductForm({ product, categories, onSaved, onCancel }: ProductF
           </label>
 
           <label className="admin-field">
+            <span>Costo del producto (USD)</span>
+            <input
+              type="number"
+              min="0"
+              step="0.01"
+              value={costPrice}
+              onChange={(e) => setCostPrice(e.target.value)}
+              placeholder="Lo que te costó a vos"
+            />
+          </label>
+
+          <label className="admin-field">
+            <span>Costo de envío estimado (USD)</span>
+            <input
+              type="number"
+              min="0"
+              step="0.01"
+              value={shippingCost}
+              onChange={(e) => setShippingCost(e.target.value)}
+            />
+          </label>
+
+          <label className="admin-field">
             <span>SKU</span>
             <input value={sku} onChange={(e) => setSku(e.target.value)} />
           </label>
@@ -235,6 +298,10 @@ export function ProductForm({ product, categories, onSaved, onCancel }: ProductF
             />
           </label>
         </div>
+
+        {costPrice && (
+          <ProfitPreview price={price} costPrice={costPrice} shippingCost={shippingCost} />
+        )}
 
         <label className="admin-field">
           <span>Descripción</span>

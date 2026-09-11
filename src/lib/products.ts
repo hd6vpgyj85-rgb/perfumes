@@ -21,6 +21,8 @@ interface ProductRow {
   gallery: string[] | null;
   visible: boolean;
   categories: { slug: PerfumeCategory } | { slug: PerfumeCategory }[] | null;
+  cost_price?: number | null;
+  shipping_cost?: number | null;
 }
 
 export interface CategoryRow {
@@ -31,6 +33,10 @@ export interface CategoryRow {
 
 const PRODUCT_SELECT =
   "id, slug, brand, name, concentration, size, price, previous_price, rating, reviews_count, badge, sku, stock, level, description, image_url, gallery, visible, categories ( slug )";
+
+// Solo para el panel admin: incluye costo y envío, datos sensibles que la
+// tienda pública (fetchStoreProducts, fetchProductBySlug) nunca debe pedir.
+const ADMIN_PRODUCT_SELECT = `${PRODUCT_SELECT}, cost_price, shipping_cost`;
 
 function mapRowToProduct(row: ProductRow): Product {
   const category = Array.isArray(row.categories) ? row.categories[0] : row.categories;
@@ -56,6 +62,8 @@ function mapRowToProduct(row: ProductRow): Product {
     imageUrl: row.image_url ?? undefined,
     gallery: row.gallery ?? [],
     visible: row.visible,
+    costPrice: row.cost_price != null ? Number(row.cost_price) : undefined,
+    shippingCost: row.shipping_cost != null ? Number(row.shipping_cost) : undefined,
   };
 }
 
@@ -77,13 +85,13 @@ export async function fetchStoreProducts(): Promise<Product[]> {
   return (data as unknown as ProductRow[]).map(mapRowToProduct);
 }
 
-/** Todos los productos (incluye ocultos) para el panel admin. */
+/** Todos los productos (incluye ocultos, costo y envío) para el panel admin. */
 export async function fetchAdminProducts(): Promise<Product[]> {
   if (!supabase) return [];
 
   const { data, error } = await supabase
     .from("products")
-    .select(PRODUCT_SELECT)
+    .select(ADMIN_PRODUCT_SELECT)
     .order("created_at", { ascending: false });
 
   if (error) {
@@ -143,6 +151,8 @@ export interface ProductInput {
   imageUrl: string | null;
   gallery: string[];
   visible: boolean;
+  costPrice: number | null;
+  shippingCost: number | null;
 }
 
 function toRow(input: ProductInput) {
@@ -163,6 +173,8 @@ function toRow(input: ProductInput) {
     image_url: input.imageUrl,
     gallery: input.gallery,
     visible: input.visible,
+    cost_price: input.costPrice,
+    shipping_cost: input.shippingCost,
   };
 }
 
