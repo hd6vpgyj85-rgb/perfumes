@@ -4,15 +4,17 @@ import { AdminProducts } from "./tabs/AdminProducts";
 import { AdminReviews } from "./tabs/AdminReviews";
 import { AdminCoupons } from "./tabs/AdminCoupons";
 import { AdminFinance } from "./tabs/AdminFinance";
+import { AdminCustomers } from "./tabs/AdminCustomers";
 import "./admin.css";
 
-type Tab = "productos" | "resenas" | "cupones" | "finanzas";
+type Tab = "productos" | "resenas" | "cupones" | "finanzas" | "clientes";
 
 const TABS: { id: Tab; label: string }[] = [
   { id: "productos", label: "Productos" },
   { id: "resenas", label: "Reseñas" },
   { id: "cupones", label: "Cupones" },
   { id: "finanzas", label: "Finanzas" },
+  { id: "clientes", label: "Clientes" },
 ];
 
 export function AdminDashboard() {
@@ -47,6 +49,7 @@ export function AdminDashboard() {
       {tab === "resenas" && <AdminReviews />}
       {tab === "cupones" && <AdminCoupons />}
       {tab === "finanzas" && <AdminFinance />}
+      {tab === "clientes" && <AdminCustomers />}
     </div>
   );
 }
