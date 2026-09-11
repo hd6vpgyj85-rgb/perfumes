@@ -3,14 +3,16 @@ import { useAuth } from "../../context/AuthContext";
 import { AdminProducts } from "./tabs/AdminProducts";
 import { AdminReviews } from "./tabs/AdminReviews";
 import { AdminCoupons } from "./tabs/AdminCoupons";
+import { AdminFinance } from "./tabs/AdminFinance";
 import "./admin.css";
 
-type Tab = "productos" | "resenas" | "cupones";
+type Tab = "productos" | "resenas" | "cupones" | "finanzas";
 
 const TABS: { id: Tab; label: string }[] = [
   { id: "productos", label: "Productos" },
   { id: "resenas", label: "Reseñas" },
   { id: "cupones", label: "Cupones" },
+  { id: "finanzas", label: "Finanzas" },
 ];
 
 export function AdminDashboard() {
@@ -44,6 +46,7 @@ export function AdminDashboard() {
       {tab === "productos" && <AdminProducts />}
       {tab === "resenas" && <AdminReviews />}
       {tab === "cupones" && <AdminCoupons />}
+      {tab === "finanzas" && <AdminFinance />}
     </div>
   );
 }

@@ -23,4 +23,6 @@ export interface Product {
   imageUrl?: string;
   gallery?: string[];
   visible?: boolean;
+  costPrice?: number;
+  shippingCost?: number;
 }
