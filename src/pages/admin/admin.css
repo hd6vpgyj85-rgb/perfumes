@@ -935,3 +935,38 @@
     flex-shrink: 0;
   }
 }
+
+.admin-qr {
+  max-width: 420px;
+  align-items: center;
+  text-align: center;
+}
+
+.admin-qr__preview {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 1rem;
+  background: var(--color-ivory);
+  border-radius: var(--radius-md);
+  min-height: 220px;
+}
+
+.admin-qr__preview img {
+  width: 100%;
+  max-width: 260px;
+  height: auto;
+  display: block;
+}
+
+.admin-qr__link {
+  font-size: 0.8rem;
+  color: rgba(248, 245, 250, 0.6);
+  word-break: break-all;
+}
+
+.admin-qr .admin-modal__actions {
+  width: 100%;
+  justify-content: center;
+}

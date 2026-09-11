@@ -4,7 +4,7 @@ import { createCustomer, updateCustomer, type CustomerInput } from "../../lib/cu
 
 interface CustomerFormProps {
   customer: Customer | null;
-  onSaved: () => void;
+  onSaved: (customer: Customer, isNew: boolean) => void;
   onCancel: () => void;
 }
 
@@ -32,12 +32,8 @@ export function CustomerForm({ customer, onSaved, onCancel }: CustomerFormProps)
 
     setSubmitting(true);
     try {
-      if (customer) {
-        await updateCustomer(customer.id, input);
-      } else {
-        await createCustomer(input);
-      }
-      onSaved();
+      const saved = customer ? await updateCustomer(customer.id, input) : await createCustomer(input);
+      onSaved(saved, !customer);
     } catch (err) {
       setError(err instanceof Error ? err.message : "No se pudo guardar el cliente.");
     } finally {
