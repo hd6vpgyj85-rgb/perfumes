@@ -184,6 +184,13 @@ export async function createProduct(input: ProductInput): Promise<void> {
   if (error) throw error;
 }
 
+/** Actualiza solo el precio de venta (usado por el precio sugerido en Finanzas). */
+export async function updateProductPrice(id: string, price: number): Promise<void> {
+  if (!supabase) throw new Error("Supabase no está configurado.");
+  const { error } = await supabase.from("products").update({ price }).eq("id", id);
+  if (error) throw error;
+}
+
 export async function updateProduct(id: string, input: ProductInput): Promise<void> {
   if (!supabase) throw new Error("Supabase no está configurado.");
   const { error } = await supabase.from("products").update(toRow(input)).eq("id", id);
