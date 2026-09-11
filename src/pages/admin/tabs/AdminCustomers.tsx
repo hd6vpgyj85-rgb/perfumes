@@ -9,6 +9,7 @@ import {
   fetchCustomers,
   fetchLoyaltyTiers,
 } from "../../../lib/customers";
+import { fetchPendingClaimCustomerIds } from "../../../lib/loyaltyClaims";
 import type { Customer, LoyaltyTier } from "../../../types/customer";
 
 function loyaltyCardUrl(token: string): string {
@@ -21,6 +22,7 @@ export function AdminCustomers() {
   const [loading, setLoading] = useState(true);
   const [editing, setEditing] = useState<Customer | "new" | null>(null);
   const [claimsFor, setClaimsFor] = useState<Customer | null>(null);
+  const [pendingCustomerIds, setPendingCustomerIds] = useState<Set<string>>(new Set());
   const [copiedId, setCopiedId] = useState<string | null>(null);
 
   const [tierPurchases, setTierPurchases] = useState("");
@@ -31,9 +33,14 @@ export function AdminCustomers() {
 
   const reload = async () => {
     setLoading(true);
-    const [customersData, tiersData] = await Promise.all([fetchCustomers(), fetchLoyaltyTiers()]);
+    const [customersData, tiersData, pendingIds] = await Promise.all([
+      fetchCustomers(),
+      fetchLoyaltyTiers(),
+      fetchPendingClaimCustomerIds(),
+    ]);
     setCustomers(customersData);
     setTiers(tiersData);
+    setPendingCustomerIds(pendingIds);
     setLoading(false);
   };
 
@@ -119,10 +126,17 @@ export function AdminCustomers() {
         <p className="admin-hint">Todavía no hay clientes cargados.</p>
       ) : (
         <div className="admin-table">
-          {customers.map((customer) => (
-            <div key={customer.id} className="admin-customer">
+          {customers.map((customer) => {
+            const hasPendingClaim = pendingCustomerIds.has(customer.id);
+            return (
+            <div key={customer.id} className={`admin-customer ${hasPendingClaim ? "has-pending-claim" : ""}`}>
               <div className="admin-customer__info">
-                <p className="admin-row__name">{customer.name}</p>
+                <p className="admin-row__name">
+                  {customer.name}
+                  {hasPendingClaim && (
+                    <span className="admin-customer__pending-badge">Reclamo pendiente</span>
+                  )}
+                </p>
                 <p className="admin-row__meta">
                   {customer.phone || "Sin WhatsApp cargado"}
                   {" · "}
@@ -175,7 +189,8 @@ export function AdminCustomers() {
                 </button>
               </div>
             </div>
-          ))}
+            );
+          })}
         </div>
       )}
 
@@ -252,7 +267,14 @@ export function AdminCustomers() {
       )}
 
       {claimsFor && (
-        <CustomerClaimsModal customer={claimsFor} tiers={tiers} onClose={() => setClaimsFor(null)} />
+        <CustomerClaimsModal
+          customer={claimsFor}
+          tiers={tiers}
+          onClose={() => {
+            setClaimsFor(null);
+            reload();
+          }}
+        />
       )}
     </div>
   );

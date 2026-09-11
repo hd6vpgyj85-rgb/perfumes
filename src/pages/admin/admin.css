@@ -794,6 +794,25 @@
   }
 }
 
+.admin-customer.has-pending-claim {
+  border-color: rgba(245, 166, 35, 0.5);
+  background: rgba(245, 166, 35, 0.08);
+}
+
+.admin-customer__pending-badge {
+  display: inline-block;
+  margin-left: 0.5rem;
+  padding: 0.15rem 0.55rem;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border-radius: 999px;
+  background: rgba(245, 166, 35, 0.18);
+  color: #f5a623;
+  vertical-align: middle;
+}
+
 .admin-loyalty-tiers {
   margin-top: 2rem;
   padding-top: 1.5rem;

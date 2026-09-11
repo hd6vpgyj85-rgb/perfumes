@@ -47,6 +47,20 @@ export async function fetchClaimsForCustomer(customerId: string): Promise<AdminC
   return (data as ClaimRow[]).map(mapAdminClaim);
 }
 
+/** Panel admin: ids de clientes con al menos un reclamo pendiente de confirmar. */
+export async function fetchPendingClaimCustomerIds(): Promise<Set<string>> {
+  if (!supabase) return new Set();
+
+  const { data, error } = await supabase.from("loyalty_claims").select("customer_id").eq("claimed", false);
+
+  if (error) {
+    console.error("Error al cargar reclamos pendientes:", error.message);
+    return new Set();
+  }
+
+  return new Set((data as { customer_id: string }[]).map((row) => row.customer_id));
+}
+
 const CODE_ALPHABET = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789"; // sin 0/O/1/I, para evitar confusiones
 
 function generateCouponCode(): string {
