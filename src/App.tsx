@@ -10,6 +10,7 @@ import { Cookies } from "./pages/legal/Cookies";
 import { Terms } from "./pages/legal/Terms";
 import { NotFound } from "./pages/NotFound";
 import { ProductDetail } from "./pages/product/ProductDetail";
+import { LoyaltyCard } from "./pages/LoyaltyCard";
 import { AdminLogin } from "./pages/admin/AdminLogin";
 import { AdminDashboard } from "./pages/admin/AdminDashboard";
 import { RequireAuth } from "./components/admin/RequireAuth";
@@ -24,6 +25,7 @@ export function App() {
         <Route path="faq" element={<Faq />} />
         <Route path="favoritos" element={<Wishlist />} />
         <Route path="finder" element={<Finder />} />
+        <Route path="fidelidad/:token" element={<LoyaltyCard />} />
         <Route path="privacy" element={<Privacy />} />
         <Route path="cookies" element={<Cookies />} />
         <Route path="terms" element={<Terms />} />

@@ -1,0 +1,148 @@
+.loyalty-page {
+  min-height: 80svh;
+  background: var(--color-black);
+  color: var(--color-ivory);
+  padding: clamp(3rem, 8vw, 6rem) 0 clamp(4rem, 8vw, 6rem);
+}
+
+.loyalty-page__title {
+  font-size: clamp(2rem, 5vw, 2.75rem);
+  margin-top: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+.loyalty-page__notfound {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.1rem;
+  color: rgba(248, 245, 250, 0.7);
+}
+
+.loyalty-card {
+  padding: 1.75rem;
+  background: var(--color-espresso);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-lg);
+  margin-bottom: 2.5rem;
+}
+
+.loyalty-card__name {
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  color: var(--color-ivory);
+}
+
+.loyalty-card__count {
+  font-size: 0.95rem;
+  color: var(--color-accent-light);
+  font-weight: 700;
+  margin-top: 0.25rem;
+  margin-bottom: 1.25rem;
+}
+
+.loyalty-card__progress {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.loyalty-card__bar {
+  height: 8px;
+  border-radius: 999px;
+  background: rgba(248, 245, 250, 0.1);
+  overflow: hidden;
+}
+
+.loyalty-card__bar-fill {
+  height: 100%;
+  background: var(--color-accent);
+  border-radius: 999px;
+  transition: width 0.4s var(--ease-editorial);
+}
+
+.loyalty-card__progress-label {
+  font-size: 0.85rem;
+  color: rgba(248, 245, 250, 0.65);
+}
+
+.loyalty-card__complete {
+  font-size: 0.9rem;
+  color: var(--color-accent-light);
+  font-weight: 600;
+}
+
+.loyalty-tiers {
+  margin-bottom: 2.5rem;
+}
+
+.loyalty-tiers__title {
+  font-family: var(--font-serif);
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.loyalty-tiers__list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.loyalty-tier {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.9rem 1rem;
+  background: var(--color-espresso);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-md);
+  opacity: 0.55;
+}
+
+.loyalty-tier.is-achieved {
+  opacity: 1;
+  border-color: rgba(124, 47, 201, 0.4);
+}
+
+.loyalty-tier__badge {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: rgba(248, 245, 250, 0.08);
+  color: rgba(248, 245, 250, 0.6);
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.loyalty-tier.is-achieved .loyalty-tier__badge {
+  background: var(--color-accent);
+  color: var(--color-black);
+}
+
+.loyalty-tier__info {
+  min-width: 0;
+}
+
+.loyalty-tier__label {
+  font-weight: 700;
+}
+
+.loyalty-tier__desc {
+  font-size: 0.85rem;
+  color: rgba(248, 245, 250, 0.6);
+}
+
+.loyalty-page__cta {
+  width: 100%;
+  text-align: center;
+}
+
+@media (min-width: 480px) {
+  .loyalty-page__cta {
+    width: auto;
+  }
+}

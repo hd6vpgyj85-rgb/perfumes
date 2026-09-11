@@ -710,3 +710,155 @@
 .admin-finance-row__suggest-apply:disabled {
   opacity: 0.6;
 }
+
+.admin-customer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  padding: 1rem;
+  background: var(--color-espresso);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-md);
+  color: var(--color-ivory);
+}
+
+.admin-customer__info {
+  min-width: 0;
+}
+
+.admin-customer__stepper {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  align-self: flex-start;
+}
+
+.admin-customer__stepper button {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  font-weight: 700;
+  background: transparent;
+  border: 1px solid var(--color-line);
+  border-radius: 999px;
+  color: var(--color-ivory);
+  line-height: 1;
+}
+
+.admin-customer__stepper button:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent-light);
+}
+
+.admin-customer__stepper span {
+  min-width: 1.5rem;
+  text-align: center;
+  font-weight: 700;
+}
+
+.admin-customer__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.admin-customer__actions .admin-coupon__edit,
+.admin-customer__actions .admin-coupon__delete {
+  flex: 1;
+  min-width: 88px;
+}
+
+@media (min-width: 640px) {
+  .admin-customer {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .admin-customer__info {
+    flex: 1;
+  }
+
+  .admin-customer__actions {
+    flex-shrink: 0;
+  }
+
+  .admin-customer__actions .admin-coupon__edit,
+  .admin-customer__actions .admin-coupon__delete {
+    flex: none;
+    min-width: 96px;
+  }
+}
+
+.admin-loyalty-tiers {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--color-line);
+}
+
+.admin-loyalty-tiers__title {
+  font-family: var(--font-serif);
+  font-size: 1.2rem;
+  color: var(--color-ivory);
+  margin-bottom: 0.3rem;
+}
+
+.admin-loyalty-tiers .admin-hint {
+  margin-bottom: 1rem;
+}
+
+.admin-loyalty-tiers .admin-table {
+  margin-bottom: 1.25rem;
+}
+
+.admin-tier {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.85rem 1rem;
+  background: var(--color-espresso);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-md);
+  color: var(--color-ivory);
+}
+
+.admin-tier__info {
+  min-width: 0;
+}
+
+.admin-tier .admin-coupon__delete {
+  flex-shrink: 0;
+  padding: 0.45rem 0.85rem;
+}
+
+.admin-tier-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  padding: 1rem;
+  background: var(--color-espresso);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-md);
+}
+
+@media (min-width: 640px) {
+  .admin-tier-form {
+    flex-direction: row;
+    align-items: flex-end;
+    flex-wrap: wrap;
+  }
+
+  .admin-tier-form .admin-field {
+    flex: 1;
+    min-width: 140px;
+  }
+
+  .admin-tier-form .btn {
+    flex-shrink: 0;
+  }
+}
