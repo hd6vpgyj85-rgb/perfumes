@@ -1,15 +1,20 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { fetchCustomerByToken, fetchLoyaltyTiers } from "../lib/customers";
+import { fetchLoyaltyClaimsByToken, requestLoyaltyClaim, type PublicClaim } from "../lib/loyaltyClaims";
 import { buildWhatsAppUrl } from "../lib/whatsapp";
 import type { LoyaltyCardCustomer, LoyaltyTier } from "../types/customer";
 import "./LoyaltyCard.css";
+
+const dateFormatter = new Intl.DateTimeFormat("es-MX", { day: "2-digit", month: "short", year: "numeric" });
 
 export function LoyaltyCard() {
   const { token } = useParams<{ token: string }>();
   const [customer, setCustomer] = useState<LoyaltyCardCustomer | null>(null);
   const [tiers, setTiers] = useState<LoyaltyTier[]>([]);
+  const [claims, setClaims] = useState<PublicClaim[]>([]);
   const [loading, setLoading] = useState(true);
+  const [requestingTierId, setRequestingTierId] = useState<string | null>(null);
 
   useEffect(() => {
     let active = true;
@@ -19,13 +24,15 @@ export function LoyaltyCard() {
         setLoading(false);
         return;
       }
-      const [customerData, tiersData] = await Promise.all([
+      const [customerData, tiersData, claimsData] = await Promise.all([
         fetchCustomerByToken(token),
         fetchLoyaltyTiers(),
+        fetchLoyaltyClaimsByToken(token),
       ]);
       if (!active) return;
       setCustomer(customerData);
       setTiers(tiersData);
+      setClaims(claimsData);
       setLoading(false);
     }
 
@@ -34,6 +41,22 @@ export function LoyaltyCard() {
       active = false;
     };
   }, [token]);
+
+  const handleClaim = async (tier: LoyaltyTier) => {
+    if (!token || !customer) return;
+    setRequestingTierId(tier.id);
+    try {
+      await requestLoyaltyClaim(token, tier.id);
+      const claimsData = await fetchLoyaltyClaimsByToken(token);
+      setClaims(claimsData);
+    } catch (err) {
+      console.error("No se pudo registrar el reclamo:", err);
+    }
+
+    const message = `¡Hola! Soy ${customer.name}, ya llegué a ${tier.purchasesRequired} compras en mi tarjeta de fidelidad AURUM y quiero reclamar mi recompensa: ${tier.rewardDescription}. ¿Me confirman?`;
+    window.open(buildWhatsAppUrl(message), "_blank", "noreferrer");
+    setRequestingTierId(null);
+  };
 
   if (loading) {
     return (
@@ -104,6 +127,9 @@ export function LoyaltyCard() {
             <div className="loyalty-tiers__list">
               {sortedTiers.map((tier) => {
                 const achieved = customer.purchasesCount >= tier.purchasesRequired;
+                const claim = claims.find((c) => c.tierId === tier.id);
+                const isRequesting = requestingTierId === tier.id;
+
                 return (
                   <div key={tier.id} className={`loyalty-tier ${achieved ? "is-achieved" : ""}`}>
                     <div className="loyalty-tier__badge">{achieved ? "✓" : tier.purchasesRequired}</div>
@@ -113,6 +139,36 @@ export function LoyaltyCard() {
                         {tier.rewardDescription}
                         {tier.discountPercent ? ` (${tier.discountPercent}%)` : ""}
                       </p>
+
+                      {achieved && (
+                        <div className="loyalty-tier__claim">
+                          {claim?.claimed ? (
+                            <>
+                              <p className="loyalty-tier__claim-status is-done">
+                                Reclamado{claim.claimedAt ? ` el ${dateFormatter.format(new Date(claim.claimedAt))}` : ""}
+                              </p>
+                              {claim.couponCode && (
+                                <p className="loyalty-tier__coupon">
+                                  Tu cupón: <strong>{claim.couponCode}</strong>
+                                </p>
+                              )}
+                            </>
+                          ) : claim ? (
+                            <p className="loyalty-tier__claim-status is-pending">
+                              Reclamo enviado, esperando confirmación
+                            </p>
+                          ) : (
+                            <button
+                              type="button"
+                              className="btn btn-outline loyalty-tier__claim-btn"
+                              onClick={() => handleClaim(tier)}
+                              disabled={isRequesting}
+                            >
+                              {isRequesting ? "Enviando…" : "Reclamar recompensa"}
+                            </button>
+                          )}
+                        </div>
+                      )}
                     </div>
                   </div>
                 );

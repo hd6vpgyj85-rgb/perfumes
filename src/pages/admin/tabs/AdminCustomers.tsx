@@ -1,5 +1,6 @@
 import { useEffect, useState, type FormEvent } from "react";
 import { CustomerForm } from "../../../components/admin/CustomerForm";
+import { CustomerClaimsModal } from "../../../components/admin/CustomerClaimsModal";
 import {
   adjustCustomerPurchases,
   createLoyaltyTier,
@@ -19,6 +20,7 @@ export function AdminCustomers() {
   const [tiers, setTiers] = useState<LoyaltyTier[]>([]);
   const [loading, setLoading] = useState(true);
   const [editing, setEditing] = useState<Customer | "new" | null>(null);
+  const [claimsFor, setClaimsFor] = useState<Customer | null>(null);
   const [copiedId, setCopiedId] = useState<string | null>(null);
 
   const [tierPurchases, setTierPurchases] = useState("");
@@ -157,6 +159,13 @@ export function AdminCustomers() {
                 <button
                   type="button"
                   className="admin-coupon__edit"
+                  onClick={() => setClaimsFor(customer)}
+                >
+                  Recompensas
+                </button>
+                <button
+                  type="button"
+                  className="admin-coupon__edit"
                   onClick={() => setEditing(customer)}
                 >
                   Editar
@@ -240,6 +249,10 @@ export function AdminCustomers() {
             reload();
           }}
         />
+      )}
+
+      {claimsFor && (
+        <CustomerClaimsModal customer={claimsFor} tiers={tiers} onClose={() => setClaimsFor(null)} />
       )}
     </div>
   );

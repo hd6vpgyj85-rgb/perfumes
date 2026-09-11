@@ -862,3 +862,57 @@
     flex-shrink: 0;
   }
 }
+
+.admin-claims {
+  max-width: 560px;
+}
+
+.admin-claims__list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+
+.admin-claim {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 0.9rem 1rem;
+  background: var(--color-black);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-md);
+}
+
+.admin-claim.is-claimed {
+  border-color: rgba(124, 47, 201, 0.4);
+}
+
+.admin-claim__info {
+  min-width: 0;
+}
+
+.admin-claim__coupon {
+  margin-top: 0.3rem;
+  font-size: 0.85rem;
+  color: var(--color-accent-light);
+}
+
+.admin-claim button {
+  align-self: flex-start;
+  padding: 0.45rem 0.9rem;
+}
+
+@media (min-width: 480px) {
+  .admin-claim {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .admin-claim button {
+    align-self: center;
+    flex-shrink: 0;
+  }
+}
