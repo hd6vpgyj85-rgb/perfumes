@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { fetchAdminProducts } from "../../../lib/products";
-import { calculateProfit } from "../../../lib/profit";
+import { fetchAdminProducts, updateProductPrice } from "../../../lib/products";
+import { calculateProfit, calculateSuggestedPrice } from "../../../lib/profit";
 import type { Product } from "../../../types/product";
 
 const currency = new Intl.NumberFormat("es-MX", {
@@ -8,6 +8,123 @@ const currency = new Intl.NumberFormat("es-MX", {
   currency: "USD",
   maximumFractionDigits: 2,
 });
+
+interface FinanceRowProps {
+  product: Product;
+  cost: number;
+  shipping: number;
+  hasCost: boolean;
+  profit: number;
+  marginPercent: number | null;
+  onPriceApplied: (id: string, price: number) => void;
+}
+
+function FinanceRow({
+  product,
+  cost,
+  shipping,
+  hasCost,
+  profit,
+  marginPercent,
+  onPriceApplied,
+}: FinanceRowProps) {
+  const [percent, setPercent] = useState("");
+  const [applying, setApplying] = useState(false);
+  const [applied, setApplied] = useState(false);
+
+  const isLoss = hasCost && profit <= 0;
+  const parsedPercent = Number(percent);
+  const showSuggestion = hasCost && percent !== "" && !Number.isNaN(parsedPercent);
+  const suggestedPrice = showSuggestion
+    ? Math.round(calculateSuggestedPrice(cost, shipping, parsedPercent) * 100) / 100
+    : null;
+
+  const handleApply = async () => {
+    if (suggestedPrice == null) return;
+    setApplying(true);
+    try {
+      await updateProductPrice(product.id, suggestedPrice);
+      onPriceApplied(product.id, suggestedPrice);
+      setApplied(true);
+      setTimeout(() => setApplied(false), 2000);
+    } catch (err) {
+      alert(err instanceof Error ? err.message : "No se pudo actualizar el precio.");
+    } finally {
+      setApplying(false);
+    }
+  };
+
+  return (
+    <div className={`admin-finance-row ${isLoss ? "is-loss" : ""}`}>
+      <div className="admin-finance-row__top">
+        <div className="admin-finance-row__info">
+          <p className="admin-row__name">{product.name}</p>
+          <p className="admin-row__meta">
+            {product.brand} · {product.stock ?? 0} en stock
+          </p>
+          {isLoss && <p className="admin-finance-row__flag">Estás perdiendo dinero con este precio</p>}
+        </div>
+
+        <div className="admin-finance-row__numbers">
+          <div className="admin-finance-row__cell">
+            <span className="admin-finance-row__label">Costo</span>
+            <span>{hasCost ? currency.format(cost) : "—"}</span>
+          </div>
+          <div className="admin-finance-row__cell">
+            <span className="admin-finance-row__label">Envío</span>
+            <span>{shipping ? currency.format(shipping) : "—"}</span>
+          </div>
+          <div className="admin-finance-row__cell">
+            <span className="admin-finance-row__label">Venta</span>
+            <span>{currency.format(product.price)}</span>
+          </div>
+          <div className="admin-finance-row__cell">
+            <span className="admin-finance-row__label">Ganancia</span>
+            <span className={isLoss ? "is-loss" : ""}>{hasCost ? currency.format(profit) : "—"}</span>
+          </div>
+          <div className="admin-finance-row__cell">
+            <span className="admin-finance-row__label">% s/costo</span>
+            <span className={isLoss ? "is-loss" : ""}>
+              {marginPercent != null ? `${marginPercent.toFixed(0)}%` : "—"}
+            </span>
+          </div>
+        </div>
+      </div>
+
+      {hasCost && (
+        <div className="admin-finance-row__suggest">
+          <label className="admin-finance-row__suggest-field">
+            <span>% de ganancia deseado</span>
+            <input
+              type="number"
+              min="0"
+              step="1"
+              value={percent}
+              onChange={(e) => setPercent(e.target.value)}
+              placeholder="ej. 40"
+            />
+          </label>
+
+          {suggestedPrice != null && (
+            <>
+              <span className="admin-finance-row__suggest-price">
+                Precio sugerido (con envío incluido): <strong>{currency.format(suggestedPrice)}</strong>
+              </span>
+              <button
+                type="button"
+                className="admin-finance-row__suggest-apply"
+                onClick={handleApply}
+                disabled={applying}
+              >
+                {applying ? "Aplicando…" : applied ? "Precio actualizado ✓" : "Usar este precio"}
+              </button>
+            </>
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
 
 export function AdminFinance() {
   const [products, setProducts] = useState<Product[]>([]);
@@ -19,6 +136,10 @@ export function AdminFinance() {
       setLoading(false);
     });
   }, []);
+
+  const handlePriceApplied = (id: string, price: number) => {
+    setProducts((prev) => prev.map((p) => (p.id === id ? { ...p, price } : p)));
+  };
 
   const rows = products.map((product) => {
     const cost = product.costPrice ?? 0;
@@ -79,49 +200,9 @@ export function AdminFinance() {
           )}
 
           <div className="admin-table">
-            {rows.map(({ product, cost, shipping, hasCost, profit, marginPercent }) => {
-              const isLoss = hasCost && profit <= 0;
-              return (
-                <div key={product.id} className={`admin-finance-row ${isLoss ? "is-loss" : ""}`}>
-                  <div className="admin-finance-row__info">
-                    <p className="admin-row__name">{product.name}</p>
-                    <p className="admin-row__meta">
-                      {product.brand} · {product.stock ?? 0} en stock
-                    </p>
-                    {isLoss && (
-                      <p className="admin-finance-row__flag">Estás perdiendo dinero con este precio</p>
-                    )}
-                  </div>
-
-                  <div className="admin-finance-row__numbers">
-                    <div className="admin-finance-row__cell">
-                      <span className="admin-finance-row__label">Costo</span>
-                      <span>{hasCost ? currency.format(cost) : "—"}</span>
-                    </div>
-                    <div className="admin-finance-row__cell">
-                      <span className="admin-finance-row__label">Envío</span>
-                      <span>{shipping ? currency.format(shipping) : "—"}</span>
-                    </div>
-                    <div className="admin-finance-row__cell">
-                      <span className="admin-finance-row__label">Venta</span>
-                      <span>{currency.format(product.price)}</span>
-                    </div>
-                    <div className="admin-finance-row__cell">
-                      <span className="admin-finance-row__label">Ganancia</span>
-                      <span className={isLoss ? "is-loss" : ""}>
-                        {hasCost ? currency.format(profit) : "—"}
-                      </span>
-                    </div>
-                    <div className="admin-finance-row__cell">
-                      <span className="admin-finance-row__label">% s/costo</span>
-                      <span className={isLoss ? "is-loss" : ""}>
-                        {marginPercent != null ? `${marginPercent.toFixed(0)}%` : "—"}
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
+            {rows.map((row) => (
+              <FinanceRow key={row.product.id} {...row} onPriceApplied={handlePriceApplied} />
+            ))}
           </div>
         </>
       )}
