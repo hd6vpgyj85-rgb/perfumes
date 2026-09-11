@@ -1,6 +1,7 @@
 import { useEffect, useState, type FormEvent } from "react";
 import { CustomerForm } from "../../../components/admin/CustomerForm";
 import { CustomerClaimsModal } from "../../../components/admin/CustomerClaimsModal";
+import { CustomerQrModal } from "../../../components/admin/CustomerQrModal";
 import {
   adjustCustomerPurchases,
   createLoyaltyTier,
@@ -22,6 +23,7 @@ export function AdminCustomers() {
   const [loading, setLoading] = useState(true);
   const [editing, setEditing] = useState<Customer | "new" | null>(null);
   const [claimsFor, setClaimsFor] = useState<Customer | null>(null);
+  const [qrFor, setQrFor] = useState<Customer | null>(null);
   const [pendingCustomerIds, setPendingCustomerIds] = useState<Set<string>>(new Set());
   const [copiedId, setCopiedId] = useState<string | null>(null);
 
@@ -173,6 +175,13 @@ export function AdminCustomers() {
                 <button
                   type="button"
                   className="admin-coupon__edit"
+                  onClick={() => setQrFor(customer)}
+                >
+                  Ver QR
+                </button>
+                <button
+                  type="button"
+                  className="admin-coupon__edit"
                   onClick={() => setClaimsFor(customer)}
                 >
                   Recompensas
@@ -259,9 +268,10 @@ export function AdminCustomers() {
         <CustomerForm
           customer={editing === "new" ? null : editing}
           onCancel={() => setEditing(null)}
-          onSaved={() => {
+          onSaved={(saved, isNew) => {
             setEditing(null);
             reload();
+            if (isNew) setQrFor(saved);
           }}
         />
       )}
@@ -276,6 +286,8 @@ export function AdminCustomers() {
           }}
         />
       )}
+
+      {qrFor && <CustomerQrModal customer={qrFor} onClose={() => setQrFor(null)} />}
     </div>
   );
 }

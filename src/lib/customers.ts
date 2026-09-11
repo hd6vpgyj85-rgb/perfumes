@@ -57,13 +57,16 @@ export async function createCustomer(input: CustomerInput): Promise<Customer> {
   return mapRowToCustomer(data as CustomerRow);
 }
 
-export async function updateCustomer(id: string, input: CustomerInput): Promise<void> {
+export async function updateCustomer(id: string, input: CustomerInput): Promise<Customer> {
   if (!supabase) throw new Error("Supabase no está configurado.");
-  const { error } = await supabase
+  const { data, error } = await supabase
     .from("customers")
     .update({ name: input.name, phone: input.phone, notes: input.notes })
-    .eq("id", id);
+    .eq("id", id)
+    .select("*")
+    .single();
   if (error) throw error;
+  return mapRowToCustomer(data as CustomerRow);
 }
 
 export async function deleteCustomer(id: string): Promise<void> {
